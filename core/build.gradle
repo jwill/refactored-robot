@@ -1,0 +1,21 @@
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+eclipse.project.name = appName + '-core'
+
+dependencies {
+    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile "io.github.libktx:ktx-log:$ktxLogVersion"
+    compile "io.github.libktx:ktx-actors:$ktxActorsVersion"
+    compile "io.github.libktx:ktx-app:$ktxAppVersion"
+    compile "io.github.libktx:ktx-async:$ktxAsyncVersion"
+    compile "io.github.libktx:ktx-assets:$ktxAssetsVersion"
+
+    // on the fly font rendering
+    compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+
+    compile "io.github.libktx:ktx-collections:$ktxAssetsVersion"
+    compile 'com.gmail.blueboxware:libgdxpluginannotations:1.13'
+
+    compile "com.rafaskoberg.gdx:typing-label:1.0.4"
+}
+        
