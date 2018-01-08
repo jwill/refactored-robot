@@ -20,14 +20,18 @@ interface Slide {
 abstract class Theme:Skin() {
     abstract var headerFont:BitmapFont
     abstract var bodyFont:BitmapFont
+    abstract var codeFont:BitmapFont
     abstract val backgroundColor: Color
 
     companion object {
-        fun createStyle(filepath: FileHandle, size:Int) : BitmapFont {
+        fun createStyle(filepath: FileHandle, size:Int, characters:String? = null) : BitmapFont {
             var font:BitmapFont
-            val generator = FreeTypeFontGenerator(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"))
+            val generator = FreeTypeFontGenerator(filepath)
             val parameter = FreeTypeFontGenerator.FreeTypeFontParameter()
             parameter.size = size
+            if (characters != null) {
+                parameter.characters = characters
+            }
             font = generator.generateFont(parameter);
             font.data.markupEnabled = true
             generator.dispose(); // don't forget to dispose to avoid memory leaks!
@@ -35,6 +39,4 @@ abstract class Theme:Skin() {
             return font
         }
     }
-
-
 }

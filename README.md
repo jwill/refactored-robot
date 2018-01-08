@@ -38,5 +38,9 @@ Slide Properties
 - Animated transitions between scenes
 - Support for slide thingie
 - Blockquotes
-- Incremental bullets
+X Incremental bullets
 - JTransc support
+
+
+Was really easy to use Highlight and convert from BBCode format to CML
+http://www.gamefromscratch.com/post/2014/07/13/Syntax-highlights-in-blog-post-code-samples-using-Highlight.aspx

@@ -16,7 +16,6 @@ class Bullets(val table: VerticalGroup, bullets: List<String>, theme:Theme, font
             label.setFontScale(fontScale)
             label
         }
-
     }
 
     fun showNextBulletCallback(index:Int) {

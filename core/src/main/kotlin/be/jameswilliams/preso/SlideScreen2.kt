@@ -4,58 +4,49 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputAdapter
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.ui.Value
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.rafaskoberg.gdx.typinglabel.TypingConfig
-import com.rafaskoberg.gdx.typinglabel.TypingLabel
-import ktx.actors.plus
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
 import ktx.app.use
-import ktx.log.logger
+import java.util.regex.Pattern
 
-class DefaultTheme:Theme() {
-    override lateinit var headerFont: BitmapFont
-    override lateinit var bodyFont: BitmapFont
-    override lateinit var codeFont: BitmapFont
+/**
+ * Created by James Williams on 1/7/2018.
+ */
 
-    var iconFont: BitmapFont
-    override val backgroundColor:Color = Color().set(0.0f, 0.0f, 1.0f, 1.0f)
+// Convert BBCode to libGDX Color Markup Language
 
-    init {
-        headerFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 48)
-        bodyFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 24)
-        codeFont = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), 40)
+class SlideScreen2(val root:Presentation, override var theme:Theme) : KtxScreen, InputAdapter(), Slide {
+    fun convertBB2CML(x:String): String {
+        var temp = x
+        val pattern = Regex("\\[color=#......\\]")
+        val pattern2 = Regex("\\[/color\\]")
 
-        iconFont = createStyle(Gdx.files.internal("fonts/fontawesome-webfont.ttf"), 128, "\uf09e\uf03e")
+        return temp.replace("color=","").replace("/color", "")
+        //temp = pattern.replace(temp, { v:MatchResult -> v.value.replace("color=","") })
+        //temp = pattern2.replace(temp, "[]")
+
     }
-}
 
 
-class SlideScreen(val root:Presentation, override var theme:Theme) : KtxScreen, InputAdapter(), Slide {
     override var template: Any
         get() = TODO("not implemented")
         set(value) {}
 
     override fun nextPressed() {
-        println("here")
         // draw bullets else advance
-        var result = bullets.showNext()
-        if (result == false) {
-            root.setScreen(SlideScreen2::class.java)
-        }
+        bullets.showNext()
     }
 
     override fun backPressed() {
         // hide bullets else previous slide
-        bullets.goBack()
+        root.setScreen(SlideScreen::class.java)
     }
 
     val stage = Stage(ScreenViewport())
@@ -80,17 +71,15 @@ class SlideScreen(val root:Presentation, override var theme:Theme) : KtxScreen, 
     }
 
 
+
+
     override fun setSlideContent() {
-        with (table) {
-            debugTable()
-            debugAll()
-            // Align table to top of view
-            top()
-            setFillParent(true)
-        }
+        var snippet = """
+[color=#66aaff]package[/color] com[color=#ff00cc].[/color]udacity[color=#ff00cc].[/color]stockhawk[color=#ff00cc].[/color]sync
+        """
 
 
-        val titleLabel = Label("Title",Label.LabelStyle(theme.headerFont, Color.WHITE))
+        val titleLabel = Label("Title", Label.LabelStyle(theme.headerFont, Color.WHITE))
         table.add(titleLabel).expandX()
         TypingConfig.FORCE_COLOR_MARKUP_BY_DEFAULT = true
         table.row()
@@ -99,7 +88,9 @@ class SlideScreen(val root:Presentation, override var theme:Theme) : KtxScreen, 
         // Add table to stage
         stage.addActor(table)
 
-        val label = Label("Hello [GREEN]Kotlin![]", Label.LabelStyle(theme.bodyFont, Color.WHITE) )
+        var t:String = convertBB2CML(snippet)
+
+        val label = Label(t, Label.LabelStyle(theme.codeFont, Color.WHITE) )
 
         label.centerLabel()
         val dt = theme as DefaultTheme
@@ -136,16 +127,14 @@ class SlideScreen(val root:Presentation, override var theme:Theme) : KtxScreen, 
     }
 
     override fun keyDown(keycode: Int): Boolean {
+        System.out.println(keycode)
         // Clicker 92 - Left, 93 - Right
 
-        if (keycode == Input.Keys.RIGHT || keycode == 93) {
-            println("right")
+        if (keycode == Input.Keys.RIGHT || keycode == 93)
             nextPressed()
-            //slideIndex++
-        } else if (keycode == Input.Keys.LEFT || keycode == 92) {
+        //slideIndex++
+        else if (keycode == Input.Keys.LEFT || keycode == 92)
             backPressed()
-            slideIndex--
-        }
         return true
     }
 }
