@@ -1,5 +1,6 @@
 package be.jameswilliams.preso
 
+import be.jameswilliams.preso.Presentation.theme
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputAdapter
@@ -22,22 +23,8 @@ import java.util.regex.Pattern
 
 // Convert BBCode to libGDX Color Markup Language
 
-class SlideScreen2(val root:Presentation, override var theme:Theme) : KtxScreen, InputAdapter(), Slide {
-    fun convertBB2CML(x:String): String {
-        var temp = x
-        val pattern = Regex("\\[color=#......\\]")
-        val pattern2 = Regex("\\[/color\\]")
+class SlideScreen2() : KtxScreen, Slide {
 
-        return temp.replace("color=","").replace("/color", "")
-        //temp = pattern.replace(temp, { v:MatchResult -> v.value.replace("color=","") })
-        //temp = pattern2.replace(temp, "[]")
-
-    }
-
-
-    override var template: Any
-        get() = TODO("not implemented")
-        set(value) {}
 
     override fun nextPressed() {
         // draw bullets else advance
@@ -46,26 +33,28 @@ class SlideScreen2(val root:Presentation, override var theme:Theme) : KtxScreen,
 
     override fun backPressed() {
         // hide bullets else previous slide
-        root.setScreen(SlideScreen::class.java)
+        Presentation.setScreen(SlideScreen::class.java)
     }
 
-    val stage = Stage(ScreenViewport())
 
     var table = Table()
     var verticalGroup = VerticalGroup()
     var slideIndex = 0
     val batch = SpriteBatch()
     val bullets:Bullets
+    var stage: Stage
 
     init {
         //Gdx.input.inputProcessor = this
+        stage = Stage(ScreenViewport())
+
 
         bullets = Bullets(verticalGroup,listOf<String>(
                 "One",
                 "Two",
                 "Three",
                 "Four"
-        ), theme)
+        ))
 
         setSlideContent()
     }
@@ -88,7 +77,7 @@ class SlideScreen2(val root:Presentation, override var theme:Theme) : KtxScreen,
         // Add table to stage
         stage.addActor(table)
 
-        var t:String = convertBB2CML(snippet)
+        var t:String = Slide.convertBB2CML(snippet)
 
         val label = Label(t, Label.LabelStyle(theme.codeFont, Color.WHITE) )
 
@@ -99,11 +88,6 @@ class SlideScreen2(val root:Presentation, override var theme:Theme) : KtxScreen,
         stage.addActor(label2)
     }
 
-    fun Label.centerLabel() {
-        val x = (Gdx.graphics.width - width) / 2
-        val y = (Gdx.graphics.height - height) / 2
-        setPosition(x,y)
-    }
 
     override fun render(delta: Float) {
         val bg = theme.backgroundColor
@@ -124,17 +108,5 @@ class SlideScreen2(val root:Presentation, override var theme:Theme) : KtxScreen,
     override fun dispose() {
         // Will be automatically disposed of by the game instance.
         batch.dispose()
-    }
-
-    override fun keyDown(keycode: Int): Boolean {
-        System.out.println(keycode)
-        // Clicker 92 - Left, 93 - Right
-
-        if (keycode == Input.Keys.RIGHT || keycode == 93)
-            nextPressed()
-        //slideIndex++
-        else if (keycode == Input.Keys.LEFT || keycode == 92)
-            backPressed()
-        return true
     }
 }

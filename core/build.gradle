@@ -17,5 +17,7 @@ dependencies {
     compile 'com.gmail.blueboxware:libgdxpluginannotations:1.13'
 
     compile "com.rafaskoberg.gdx:typing-label:1.0.4"
+
+    compile "org.reflections:reflections:0.9.11"
 }
         

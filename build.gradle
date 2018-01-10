@@ -22,6 +22,10 @@ configure(subprojects) {
     sourceCompatibility = 1.6
 }
 
+tasks.withType(JavaCompile) {
+    options.incremental = true // one flag, and things will get MUCH faster
+}
+
 subprojects {
     version = '0.0.1-SNAPSHOT'
     ext.appName = 'KPresentation'

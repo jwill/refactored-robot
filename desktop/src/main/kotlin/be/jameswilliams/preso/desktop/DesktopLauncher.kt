@@ -11,7 +11,7 @@ object DesktopLauncher {
         createApplication()
     }
 
-    private fun createApplication() = LwjglApplication(Presentation(), defaultConfiguration)
+    private fun createApplication() = LwjglApplication(Presentation, defaultConfiguration)
 
     private val defaultConfiguration: LwjglApplicationConfiguration
         get() {

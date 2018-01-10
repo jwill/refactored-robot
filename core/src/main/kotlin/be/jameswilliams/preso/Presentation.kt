@@ -1,32 +1,111 @@
 package be.jameswilliams.preso
 
-import com.badlogic.gdx.Screen
-import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.BitmapFont
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import be.jameswilliams.preso.slides.*
+import be.jameswilliams.preso.templates.BackgroundImageSlide
+import be.jameswilliams.preso.templates.Headline1
+import be.jameswilliams.preso.templates.Headline2
 import ktx.app.KtxScreen
 import ktx.app.KtxGame
-import ktx.app.use
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.InputAdapter
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter
+import com.badlogic.gdx.Input
+import com.badlogic.gdx.utils.Scaling
 import ktx.app.KtxInputAdapter
+import org.reflections.Reflections
+import java.lang.reflect.Type
 
-class Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
-    companion object {
-        lateinit var theme:Theme
-    }
+object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
+    lateinit var theme:Theme
+
     override fun create() {
         Gdx.input.inputProcessor = this
 
         theme = DefaultTheme()
-        addScreen(SlideScreen(this, theme))
-        addScreen(SlideScreen2(this, theme))
-        setScreen<SlideScreen>()
+
+        addScreen(Slide0())
+        addScreen(Slide1())
+        addScreen(Slide2())
+        addScreen(Slide3())
+        addScreen(Slide4())
+
+        addScreen(Slide5())
+        addScreen(Slide6())
+        addScreen(Slide7())
+        addScreen(Slide8())
+        addScreen(Slide9())
+
+        addScreen(Slide10())
+        addScreen(Slide11())
+        addScreen(Slide12())
+        addScreen(Slide13())
+        addScreen(Slide14())
+
+        addScreen(Slide15())
+        addScreen(Slide16())
+        addScreen(Slide17())
+        addScreen(Slide18())
+        addScreen(Slide19())
+
+        addScreen(Slide20())
+        addScreen(Slide21())
+        addScreen(Slide22())
+        addScreen(Slide23())
+        addScreen(Slide24())
+
+        addScreen(Slide25())
+        addScreen(Slide26())
+        addScreen(Slide27())
+        addScreen(Slide28())
+        addScreen(Slide29())
+
+        addScreen(Slide30())
+        addScreen(Slide31())
+        addScreen(Slide32())
+        addScreen(Slide33())
+        addScreen(Slide34())
+
+        addScreen(Slide35())
+        addScreen(Slide36())
+        addScreen(Slide37())
+        addScreen(Slide38())
+        addScreen(Slide39())
+
+        addScreen(Slide40())
+        addScreen(Slide41())
+        addScreen(Slide42())
+        addScreen(Slide43())
+        addScreen(Slide44())
+
+        addScreen(Slide45())
+        addScreen(Slide46())
+        addScreen(Slide47())
+        addScreen(Slide48())
+        addScreen(Slide49())
+
+        addScreen(Slide50())
+        addScreen(Slide51())
+        addScreen(Slide52())
+        addScreen(Slide53())
+        addScreen(Slide54())
+
+        addScreen(Slide55())
+        addScreen(Slide56())
+        addScreen(Slide57())
+        addScreen(Slide58())
+        addScreen(Slide59())
+
+        addScreen(Slide60())
+
+        setScreen<Slide0>()
     }
 
     override fun keyDown(keycode: Int): Boolean {
-       return (currentScreen as InputAdapter).keyDown(keycode)
+        var slide = currentScreen as Slide
+        if (keycode == Input.Keys.RIGHT || keycode == 93) {
+            slide.nextPressed()
+        } else if (keycode == Input.Keys.LEFT || keycode == 92) {
+            slide.backPressed()
+        }
+
+       return true
     }
 }
