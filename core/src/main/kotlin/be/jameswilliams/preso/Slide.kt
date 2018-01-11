@@ -60,12 +60,12 @@ class DefaultTheme:Theme() {
     override lateinit var codeFont: BitmapFont
 
     override lateinit var iconFont: BitmapFont
-    override val backgroundColor:Color = Color().set(0.0f, 0.0f, 1.0f, 1.0f)
+    override val backgroundColor:Color = Color().set(0.0f, 0.0f, 0.0f, 1.0f)
 
     init {
-        headerFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 64)
-        bodyFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 48)
-        codeFont = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), 40)
+        headerFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 96)
+        bodyFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 96)
+        codeFont = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), 64)
 
         /* http://www.fontawesomecheatsheet.com/
          * Android          \uf17b
@@ -76,6 +76,11 @@ class DefaultTheme:Theme() {
          */
         iconFont = createStyle(Gdx.files.internal("fonts/fontawesome-webfont.ttf"), 128, "\uf17b\uf09e\uf03e\uf099\uf111")
     }
+}
+object IconFontConstants {
+    val ANDROID = "\uf17b"
+    val TWITTER = "\uf099"
+
 }
 
 fun Label.centerLabel() {

@@ -1,5 +1,6 @@
 package be.jameswilliams.preso.templates
 import be.jameswilliams.preso.*
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
@@ -28,7 +29,10 @@ open class BackgroundImageSlide(val filehandle: FileHandle, val scale:Scaling, v
     override fun setSlideContent() {
         image.setScaling(scale)
         // TODO Figure out centering without making everything the exact window dimensions
-        image.setAlign(Align.center)
+        var x = (Gdx.graphics.width - image.width) / 2f
+        var y = (Gdx.graphics.height - image.height) / 2f
+        image.x = x
+        image.y = y
         stage.addActor(image)
     }
 

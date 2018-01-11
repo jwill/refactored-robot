@@ -1,0 +1,12 @@
+[color=#ff3030]<android.support.constraint.ConstraintLayout ...>[/color]
+[color=#ff3030]<android.support.constraint.Guideline[/color]
+    android:[color=#f48c23]layout_width[/color]=[color=#1861a7]"wrap_content"[/color]
+    android:[color=#f48c23]layout_height[/color]=[color=#1861a7]"wrap_content"[/color]
+    android:[color=#f48c23]id[/color]=[color=#1861a7]"@+id/guideline"[/color]
+    android:[color=#f48c23]orientation[/color]=[color=#1861a7]"vertical"[/color]
+    app:[color=#f48c23]layout_constraintGuide_percent[/color]=[color=#1861a7]"0.05"[/color] [color=#ff3030]/>[/color]
+
+    [color=#ff3030]<TextView[/color] android:[color=#f48c23]id[/color]=[color=#1861a7]"@+id/textView"[/color]
+        ...
+        app:[color=#f48c23]layout_constraintLeft_toLeftOf[/color]=[color=#1861a7]"@+id/guideline"[/color][color=#ff3030]/>[/color]
+[color=#ff3030]</android.support.constraint.ConstraintLayout>[/color]

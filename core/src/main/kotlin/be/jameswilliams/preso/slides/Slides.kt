@@ -1,12 +1,25 @@
 package be.jameswilliams.preso.slides
 
-import be.jameswilliams.preso.Presentation
-import be.jameswilliams.preso.templates.BackgroundImageSlide
-import be.jameswilliams.preso.templates.BulletsSlide
-import be.jameswilliams.preso.templates.HeadlineSlide
+import be.jameswilliams.preso.*
+import be.jameswilliams.preso.templates.*
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.Animation
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.Image
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Table
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup
 import com.badlogic.gdx.utils.Scaling
 import com.badlogic.gdx.utils.Scaling.*
+import com.badlogic.gdx.utils.viewport.ScreenViewport
+import com.rafaskoberg.gdx.typinglabel.TypingConfig
+import ktx.app.KtxScreen
+import ktx.app.clearScreen
+import ktx.app.use
+import ktx.collections.gdxArrayOf
 
 // This is where slides live until they deserve
 // their own file
@@ -31,7 +44,7 @@ class Slide4 : BulletsSlide("[RED]The Android View Rendering Cycle[]", listOf("M
 
 class Slide5 : HeadlineSlide("Measuring A View", Slide4::class.java, Slide6::class.java)
 
-class Slide6 : HeadlineSlide("onMeasure(widthMeasureSpec,heightMeasureSpec)", Slide5::class.java, Slide7::class.java)
+class Slide6 : HeadlineSlide("onMeasure(widthMeasureSpec, heightMeasureSpec)", Slide5::class.java, Slide7::class.java)
 
 class Slide7 : BulletsSlide("MeasureSpec", listOf("mode", "size", "")) {
     override fun backPressed() {
@@ -67,9 +80,14 @@ class Slide8 : BulletsSlide("MeasureSpec Modes", listOf("EXACTLY", "AT MOST", "U
 
 class Slide9 : HeadlineSlide("onLayout(changed, L, T, R, B)", Slide8::class.java, Slide10::class.java)
 
-class Slide10 : HeadlineSlide("Double Taxation", Slide9::class.java, Slide11::class.java)
+class Slide10 : HeadlineSlide("Double Taxation", Slide9::class.java, Slide10A::class.java)
 
-class Slide11 : HeadlineSlide("Why is this Important?", Slide10::class.java, Slide12::class.java)
+val slide10A_definition = "Android has to do multiple measure passes to\n" +
+        " determine the final positions of a View"
+class Slide10A : DefinitionSlide("What is double taxation?",
+        slide10A_definition, Slide10::class.java, Slide11::class.java )
+
+class Slide11 : HeadlineSlide("Why is this Important?", Slide10A::class.java, Slide12::class.java)
 
 // TODO Perhaps add animation here
 class Slide12 : HeadlineSlide("16ms", Slide11::class.java, Slide13::class.java)
@@ -79,19 +97,75 @@ class Slide13 : HeadlineSlide("What about Relative Layout?", Slide12::class.java
 class Slide14 : HeadlineSlide("GridLayout", Slide13::class.java, Slide15::class.java)
 
 class Slide15 : HeadlineSlide("ConstraintLayout", Slide14::class.java, Slide16::class.java)
+class Slide16 : BulletsSlide("ConstraintLayout",
+        listOf("Support library", "Available on API 9+ (Gingerbread)", "")) {
+    override fun backPressed() {
+        var result = super.bullets.goBack()
+        if (result == false) {
+            Presentation.setScreen(Slide15::class.java)
+        }
+    }
 
-class Slide16 : HeadlineSlide("ConstraintLayout is a support library", Slide15::class.java, Slide17::class.java)
+    override fun nextPressed() {
+        var result = super.bullets.showNext()
+        if (result == false) {
+            Presentation.setScreen(Slide17::class.java)
+        }
+    }
+}
 
-class Slide17 : HeadlineSlide("Supported back to API 9 (Gingerbread)", Slide16::class.java, Slide18::class.java)
+class Slide17 : HeadlineSlide("What are constraints?", Slide16::class.java, Slide18::class.java)
 
-// TODO Insert animation from script
-class Slide18 : HeadlineSlide("What are constraints?", Slide17::class.java, Slide19::class.java)
+val definition = "A restriction or limitation on the properties \nof a View that the layout attempts to respect"
+
+class Slide18 : DefinitionSlide("What is a constraint?",
+        definition, Slide17::class.java, Slide18A::class.java )
+
+class Slide18A : KtxScreen, Slide {
+    override fun backPressed() = Presentation.setScreen(Slide18::class.java)
+    override fun nextPressed() = Presentation.setScreen(Slide19::class.java)
+
+    val textures = gdxArrayOf<Texture>(
+            Texture("images/device.png"),
+            Texture("images/device2.png"),
+            Texture("images/device3.png"),
+            Texture("images/device4.png"))
+
+    var animation: Animation<Texture>
+    var batch = SpriteBatch()
+    var currentTime = 0f
+
+    init {
+        animation = Animation<Texture>(0.333f, textures, Animation.PlayMode.LOOP)
+        setSlideContent()
+    }
+
+
+    override fun setSlideContent() {}
+
+    override fun render(delta: Float) {
+        val bg = Presentation.theme.backgroundColor
+        clearScreen(bg.r, bg.g, bg.b, bg.a)
+
+        currentTime += delta
+
+        val currentFrame = animation.getKeyFrame(currentTime, true)
+        batch.use {
+            it.draw(currentFrame, 0f, 0f, Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
+        }
+    }
+
+    override fun dispose() {
+        // Will be automatically disposed of by the game instance.
+        batch.dispose()
+    }
+}
 
 class Slide19 : BulletsSlide("The New Layout Editor", listOf("Design View", "Blueprint View", "")) {
     override fun backPressed() {
         var result = super.bullets.goBack()
         if (result == false) {
-            Presentation.setScreen(Slide18::class.java)
+            Presentation.setScreen(Slide18A::class.java)
         }
     }
 
@@ -104,7 +178,7 @@ class Slide19 : BulletsSlide("The New Layout Editor", listOf("Design View", "Blu
 }
 
 class Slide20 : BackgroundImageSlide(Gdx.files.internal("images/design-view.png"),
-        fit, Slide19::class.java, Slide21::class.java)
+        stretchY, Slide19::class.java, Slide21::class.java)
 
 class Slide21 : BackgroundImageSlide(Gdx.files.internal("images/blueprint-view.png"),
         fit, Slide20::class.java, Slide22::class.java)
@@ -199,8 +273,10 @@ class Slide48 : BackgroundImageSlide(Gdx.files.internal("images/guidelines-bluep
         fit, Slide47::class.java, Slide49::class.java)
 
 // TODO Replace with code slide?
-class Slide49 : BackgroundImageSlide(Gdx.files.internal("images/guidelines-code.png"),
-        fit, Slide48::class.java, Slide50::class.java)
+val codeString = Gdx.files.internal("code/guidelines.txt.out").readString()
+class Slide49 : CodeSlide("Guidelines", codeString, Slide48::class.java, Slide50::class.java)
+//class Slide49 : BackgroundImageSlide(Gdx.files.internal("images/guidelines-code.png"),
+//        fit, Slide48::class.java, Slide50::class.java)
 
 class Slide50 : HeadlineSlide("Barriers", Slide49::class.java, Slide51::class.java)
 

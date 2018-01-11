@@ -18,8 +18,11 @@ object DesktopLauncher {
             val configuration = LwjglApplicationConfiguration()
             configuration.title = "Presentation"
             // TODO Later support fullscreen toggle
-            configuration.width = 1920
-            configuration.height = 1080
+            //configuration.width = 1920
+            //configuration.height = 1080
+
+            configuration.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
+            configuration.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
 
             //Set full screem
            /* System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");

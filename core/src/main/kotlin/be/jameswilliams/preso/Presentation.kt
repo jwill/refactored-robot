@@ -1,20 +1,20 @@
 package be.jameswilliams.preso
 
 import be.jameswilliams.preso.slides.*
-import be.jameswilliams.preso.templates.BackgroundImageSlide
-import be.jameswilliams.preso.templates.Headline1
-import be.jameswilliams.preso.templates.Headline2
-import ktx.app.KtxScreen
-import ktx.app.KtxGame
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
-import com.badlogic.gdx.utils.Scaling
+import com.badlogic.gdx.graphics.Pixmap
+import com.badlogic.gdx.graphics.PixmapIO
+import com.badlogic.gdx.utils.BufferUtils
+import com.badlogic.gdx.utils.ScreenUtils
+import ktx.app.KtxGame
 import ktx.app.KtxInputAdapter
-import org.reflections.Reflections
-import java.lang.reflect.Type
+import ktx.app.KtxScreen
+
 
 object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
     lateinit var theme:Theme
+    var i = 0
 
     override fun create() {
         Gdx.input.inputProcessor = this
@@ -95,6 +95,9 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
 
         addScreen(Slide60())
 
+        addScreen(Slide18A())
+        addScreen(Slide10A())
+
         setScreen<Slide0>()
     }
 
@@ -104,8 +107,19 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
             slide.nextPressed()
         } else if (keycode == Input.Keys.LEFT || keycode == 92) {
             slide.backPressed()
+        } else if (keycode == Input.Keys.SPACE) {
+            saveScreenShot(i++)
         }
 
        return true
+    }
+
+    fun saveScreenShot(index:Int) {
+        val pixels = ScreenUtils.getFrameBufferPixels(0, 0, Gdx.graphics.backBufferWidth, Gdx.graphics.backBufferHeight, true)
+
+        val pixmap = Pixmap(Gdx.graphics.backBufferWidth, Gdx.graphics.backBufferHeight, Pixmap.Format.RGBA8888)
+        BufferUtils.copy(pixels, 0, pixmap.pixels, pixels.size)
+        PixmapIO.writePNG(Gdx.files.external("Downloads/screens/output${index}.png"), pixmap)
+        pixmap.dispose()
     }
 }
