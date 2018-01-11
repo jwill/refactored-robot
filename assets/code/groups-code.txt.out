@@ -1,0 +1,17 @@
+[color=#ff3030]class[/color] MainActivity [color=#555555]:[/color] [color=#d11ced]AppCompatActivity[/color][color=#555555](),[/color] View[color=#555555].[/color]OnClickListener [color=#555555]{[/color]
+
+    [color=#ff3030]override fun[/color] [color=#d11ced]onCreate[/color][color=#555555]([/color]savedInstanceState[color=#555555]:[/color] Bundle?[color=#555555]) {[/color]
+        [color=#006633]// ...[/color]
+        group [color=#555555]=[/color] [color=#d11ced]findViewById[/color][color=#555555]([/color]R[color=#555555].[/color]id[color=#555555].[/color]group[color=#555555])[/color]
+    [color=#555555]}[/color]
+
+    [color=#ff3030]override fun[/color] [color=#d11ced]onClick[/color][color=#555555]([/color]v[color=#555555]:[/color] View?[color=#555555]) {[/color]
+        [color=#ff3030]if[/color] [color=#555555]([/color]group[color=#555555].[/color]visibility [color=#555555]==[/color] View[color=#555555].[/color]GONE[color=#555555]) {[/color]
+            group[color=#555555].[/color]visibility [color=#555555]=[/color] View[color=#555555].[/color]VISIBLE
+            button[color=#555555].[/color][color=#d11ced]setText[/color][color=#555555]([/color]R[color=#555555].[/color]string[color=#555555].[/color]hide_details[color=#555555])[/color]
+        [color=#555555]}[/color] [color=#ff3030]else[/color] [color=#555555]{[/color]
+            group[color=#555555].[/color]visibility [color=#555555]=[/color] View[color=#555555].[/color]GONE
+            button[color=#555555].[/color][color=#d11ced]setText[/color][color=#555555]([/color]R[color=#555555].[/color]string[color=#555555].[/color]show_details[color=#555555])[/color]
+        [color=#555555]}[/color]
+    [color=#555555]}[/color]
+[color=#555555]}[/color]

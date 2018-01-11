@@ -1,6 +1,5 @@
 package be.jameswilliams.preso.slides
 import be.jameswilliams.preso.*
-import be.jameswilliams.preso.templates.Headline1
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch

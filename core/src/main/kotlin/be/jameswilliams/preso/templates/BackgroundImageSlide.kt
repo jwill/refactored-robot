@@ -1,20 +1,20 @@
 package be.jameswilliams.preso.templates
-import be.jameswilliams.preso.*
+import be.jameswilliams.preso.Presentation
+import be.jameswilliams.preso.Slide
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
-import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Scaling
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
 
-
-//
-open class BackgroundImageSlide(val filehandle: FileHandle, val scale:Scaling, val previous:Class<out KtxScreen>? = null, val next:Class<out KtxScreen>? = null) : KtxScreen, Slide {
+open class BackgroundImageSlide(val filehandle: FileHandle, val scale:Scaling,
+                                val previous:Class<out KtxScreen>? = null,
+                                val next:Class<out KtxScreen>? = null) : KtxScreen, Slide {
     val batch = SpriteBatch()
     var stage: Stage
     val texture = Texture(filehandle)
@@ -28,7 +28,6 @@ open class BackgroundImageSlide(val filehandle: FileHandle, val scale:Scaling, v
 
     override fun setSlideContent() {
         image.setScaling(scale)
-        // TODO Figure out centering without making everything the exact window dimensions
         var x = (Gdx.graphics.width - image.width) / 2f
         var y = (Gdx.graphics.height - image.height) / 2f
         image.x = x

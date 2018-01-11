@@ -1,0 +1,5 @@
+[color=#ff3030]<Button[/color] android:[color=#f48c23]id[/color]=[color=#1861a7]"@+id/buttonA"[/color] ... [color=#ff3030]/>[/color]
+[color=#ff3030]<Button[/color] android:[color=#f48c23]id[/color]=[color=#1861a7]"@+id/buttonB"[/color] ...
+  app:[color=#f48c23]layout_constraintCircle[/color]=[color=#1861a7]"@+id/buttonA"[/color]
+  app:[color=#f48c23]layout_constraintCircleRadius[/color]=[color=#1861a7]"100dp"[/color]
+  app:[color=#f48c23]layout_constraintCircleAngle[/color]=[color=#1861a7]"45"[/color] [color=#ff3030]/>[/color]

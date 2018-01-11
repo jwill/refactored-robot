@@ -1,0 +1,7 @@
+[color=#ff3030]<android.support.constraint.Group[/color]
+    android:[color=#f48c23]id[/color]=[color=#1861a7]"@+id/group"[/color]
+    android:[color=#f48c23]layout_height[/color]=[color=#1861a7]"wrap_content"[/color]
+    android:[color=#f48c23]layout_width[/color]=[color=#1861a7]"wrap_content"[/color]
+    app:[color=#f48c23]constraint_referenced_ids[/color]=
+    [color=#1861a7]"locationLabel,locationDetails,phoneLabel,phoneDetails"[/color]
+[color=#ff3030]/>[/color]

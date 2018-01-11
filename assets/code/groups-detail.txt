@@ -1,0 +1,6 @@
+<android.support.constraint.Group
+    android:id="@+id/group"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    app:constraint_referenced_ids="locationLabel,locationDetails,phoneLabel,phoneDetails"
+/>

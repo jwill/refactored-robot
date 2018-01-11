@@ -98,7 +98,7 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         addScreen(Slide18A())
         addScreen(Slide10A())
 
-        setScreen<Slide0>()
+        setScreen<Slide55>()
     }
 
     override fun keyDown(keycode: Int): Boolean {

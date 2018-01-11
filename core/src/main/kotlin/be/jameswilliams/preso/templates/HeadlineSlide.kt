@@ -1,34 +1,18 @@
 package be.jameswilliams.preso.templates
-import be.jameswilliams.preso.*
-import be.jameswilliams.preso.slides.Slide2
+
+import be.jameswilliams.preso.Presentation
+import be.jameswilliams.preso.Slide
+import be.jameswilliams.preso.centerLabel
+import be.jameswilliams.preso.headerLabel
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
-import kotlin.reflect.KClass
 
-class Headline1(): HeadlineSlide("My Headline") {
-    override fun nextPressed() {
-        Presentation.setScreen(Headline2::class.java)
-    }
-
-    override fun backPressed() {
-        Presentation.setScreen(Slide2::class.java)
-    }
-}
-
-class Headline2(): HeadlineSlide("My Headline 2") {
-    override fun nextPressed() {
-
-    }
-
-    override fun backPressed() {
-        Presentation.setScreen(Headline1::class.java)
-    }
-}
-
-open class HeadlineSlide(val title:String, val previous:Class<out KtxScreen>? = null, val next:Class<out KtxScreen>? = null) : KtxScreen, Slide {
+open class HeadlineSlide(val title: String,
+                         val previous: Class<out KtxScreen>? = null,
+                         val next: Class<out KtxScreen>? = null) : KtxScreen, Slide {
 
     val batch = SpriteBatch()
     var stage: Stage

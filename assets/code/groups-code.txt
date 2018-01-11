@@ -1,0 +1,17 @@
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        // ...
+        group = findViewById(R.id.group)
+    }
+
+    override fun onClick(v: View?) {
+        if (group.visibility == View.GONE) {
+            group.visibility = View.VISIBLE
+            button.setText(R.string.hide_details)
+        } else {
+            group.visibility = View.GONE
+            button.setText(R.string.show_details)
+        }
+    }
+}

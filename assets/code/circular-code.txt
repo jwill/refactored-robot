@@ -1,0 +1,5 @@
+<Button android:id="@+id/buttonA" ... />
+<Button android:id="@+id/buttonB" ...
+  app:layout_constraintCircle="@+id/buttonA"
+  app:layout_constraintCircleRadius="100dp"
+  app:layout_constraintCircleAngle="45" />

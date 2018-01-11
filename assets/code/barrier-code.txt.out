@@ -1,0 +1,17 @@
+[color=#ff3030]<android[/color].support.constraint.ConstraintLayout  ...[color=#ff3030]>[/color]
+[color=#ff3030]<TextView[/color] android:[color=#f48c23]id[/color]=[color=#1861a7]"@+id/streetAddress"[/color] .. [color=#ff3030]/>[/color]
+
+[color=#ff3030]<EditText[/color] app:[color=#f48c23]layout_constraintStart_toEndOf[/color]=[color=#1861a7]"@+id/barrier"[/color] [color=#ff3030]/>[/color]
+
+[color=#ff3030]<TextView[/color] android:[color=#f48c23]id[/color]=[color=#1861a7]"@+id/dateOfBirth"[/color][color=#ff3030]/>[/color]
+
+[color=#ff3030]<EditText[/color] app:[color=#f48c23]layout_constraintStart_toEndOf[/color]=[color=#1861a7]"@+id/barrier"[/color]
+   tools:[color=#f48c23]layout_editor_absoluteY[/color]=[color=#1861a7]"61dp"[/color] [color=#ff3030]/>[/color]
+
+ [color=#ff3030]<android[/color].support.constraint.Barrier
+   android:[color=#f48c23]id[/color]=[color=#1861a7]"@+id/guideline"[/color]
+   app:[color=#f48c23]barrierDirection[/color]=[color=#1861a7]"end"[/color] [color=#006633]<!--start,end top, bottom, right,left-->[/color]
+   app:[color=#f48c23]constraint_referenced_ids[/color]=[color=#1861a7]"streetAddress,dateOfBirth"[/color]
+   app:[color=#f48c23]layout_constraintGuide_begin[/color]=[color=#1861a7]"16dp"[/color] [color=#ff3030]/>[/color]
+
+[color=#ff3030]</android[/color].support.constraint.ConstraintLayout[color=#ff3030]>[/color]

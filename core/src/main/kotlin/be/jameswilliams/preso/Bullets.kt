@@ -24,6 +24,8 @@ class Bullets(val table: VerticalGroup, bullets: List<String>, fontScale:Float =
 
             //horizontalGroup.addActor(bullet)
             horizontalGroup.addActor(label)
+            horizontalGroup.padTop(32f)
+            horizontalGroup.padBottom(32f)
             horizontalGroup
         }
         println(texts.size)

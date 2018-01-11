@@ -1,7 +1,8 @@
 package be.jameswilliams.preso.templates
 
-import be.jameswilliams.preso.*
-import com.badlogic.gdx.Gdx
+import be.jameswilliams.preso.Bullets
+import be.jameswilliams.preso.Presentation
+import be.jameswilliams.preso.Slide
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -11,10 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.rafaskoberg.gdx.typinglabel.TypingConfig
-import ktx.actors.centerPosition
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
-import ktx.app.use
 
 open class BulletsSlide(val title:String, val bulletItems:List<String>, debug:Boolean = true) : KtxScreen, Slide {
     var table = Table()
@@ -51,7 +50,7 @@ open class BulletsSlide(val title:String, val bulletItems:List<String>, debug:Bo
         TypingConfig.FORCE_COLOR_MARKUP_BY_DEFAULT = true
         table.row()
         //table.add(verticalGroup).left().padLeft(16f)
-        table.add(verticalGroup).center().padTop(32f)
+        table.add(verticalGroup).center().padTop(64f)
 
 
         table.align(Align.top)

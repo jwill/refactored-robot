@@ -272,20 +272,24 @@ class Slide47 : HeadlineSlide("Guidelines", Slide46::class.java, Slide48::class.
 class Slide48 : BackgroundImageSlide(Gdx.files.internal("images/guidelines-blueprint.png"),
         fit, Slide47::class.java, Slide49::class.java)
 
-// TODO Replace with code slide?
 val codeString = Gdx.files.internal("code/guidelines.txt.out").readString()
 class Slide49 : CodeSlide("Guidelines", codeString, Slide48::class.java, Slide50::class.java)
-//class Slide49 : BackgroundImageSlide(Gdx.files.internal("images/guidelines-code.png"),
-//        fit, Slide48::class.java, Slide50::class.java)
 
 class Slide50 : HeadlineSlide("Barriers", Slide49::class.java, Slide51::class.java)
 
-class Slide51 : HeadlineSlide("Any Questions?", Slide50::class.java, Slide52::class.java)
+val slide51_code = Gdx.files.internal("code/barrier-code.txt.out").readString()
+class Slide51 : CodeSlide("Barriers", slide51_code, Slide50::class.java, Slide52::class.java)
+
 class Slide52 : HeadlineSlide("Any Questions?", Slide51::class.java, Slide53::class.java)
 
 class Slide53 : HeadlineSlide("Groups", Slide52::class.java, Slide54::class.java)
-class Slide54 : HeadlineSlide("Any Questions?", Slide53::class.java, Slide55::class.java)
-class Slide55 : HeadlineSlide("Any Questions?", Slide54::class.java, Slide56::class.java)
+
+val slide54_code = Gdx.files.internal("code/groups-code.txt.out").readString()
+class Slide54 : CodeSlide("Groups", slide54_code, Slide53::class.java, Slide55::class.java)
+
+val slide55_code = Gdx.files.internal("code/groups-detail.txt.out").readString()
+
+class Slide55 : CodeSlide("Groups", slide55_code, Slide54::class.java, Slide56::class.java)
 
 class Slide56 : HeadlineSlide("Placeholders", Slide55::class.java, Slide57::class.java)
 class Slide57 : HeadlineSlide("Any Questions?", Slide56::class.java, Slide58::class.java)
