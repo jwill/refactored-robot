@@ -80,6 +80,7 @@ class DefaultTheme:Theme() {
 object IconFontConstants {
     val ANDROID = "\uf17b"
     val TWITTER = "\uf099"
+    val BULLET = "\uf111"
 
 }
 

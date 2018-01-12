@@ -16,8 +16,7 @@ class Bullets(val table: VerticalGroup, bullets: List<String>, fontScale:Float =
     init {
         texts = bullets.map {
             val horizontalGroup = HorizontalGroup()
-            // TODO make this a constant
-            val bullet = iconLabel("\uf111  ")
+            val bullet = iconLabel(IconFontConstants.BULLET +"  ")
             val label = TypingLabel(it, Label.LabelStyle(Presentation.theme.bodyFont, Color.WHITE))
             bullet.setFontScale(fontScale/4)
             label.setFontScale(fontScale)

@@ -33,17 +33,17 @@ open class CodeSlide(val title:String, val sourceCode:String,
     override fun setSlideContent() {
         val titleLabel = headerLabel(title)
         val convertedCode = Slide.convertBB2CML(sourceCode)
-        val definitionLabel = codeLabel(convertedCode)
-        definitionLabel.setWrap(true)
+        val codeLabel = codeLabel(convertedCode)
+        codeLabel.setWrap(true)
 
         TypingConfig.FORCE_COLOR_MARKUP_BY_DEFAULT = true
 
         titleLabel.centerX()
         titleLabel.y = Gdx.graphics.height - titleLabel.height
-        definitionLabel.centerLabel()
+        codeLabel.centerLabel()
 
         stage.addActor(titleLabel)
-        stage.addActor(definitionLabel)
+        stage.addActor(codeLabel)
     }
 
     override fun render(delta: Float) {
