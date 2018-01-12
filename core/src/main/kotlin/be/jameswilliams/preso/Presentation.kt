@@ -10,28 +10,30 @@ import com.badlogic.gdx.utils.ScreenUtils
 import ktx.app.KtxGame
 import ktx.app.KtxInputAdapter
 import ktx.app.KtxScreen
+import java.util.*
 
 
 object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
     lateinit var theme:Theme
     var i = 0
+    var startTime:Long = 0
+    var endTime:Long = 0
 
     override fun create() {
         Gdx.input.inputProcessor = this
 
         theme = DefaultTheme()
+        startTime = Date().time
 
         addScreen(Slide0())
         addScreen(Slide1())
         addScreen(Slide2())
         addScreen(Slide3())
-        addScreen(Slide4())
 
         addScreen(Slide5())
         addScreen(Slide6())
         addScreen(Slide7())
         addScreen(Slide8())
-        addScreen(Slide9())
 
         addScreen(Slide10())
         addScreen(Slide11())
@@ -90,15 +92,25 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         addScreen(Slide55())
         addScreen(Slide56())
         addScreen(Slide57())
-        addScreen(Slide58())
         addScreen(Slide59())
 
         addScreen(Slide60())
+        addScreen(Slide61())
 
         addScreen(Slide18A())
         addScreen(Slide10A())
 
-        setScreen<Slide55>()
+
+        addScreen(Slide13A())
+        addScreen(Slide13B())
+        addScreen(Slide22A())
+        addScreen(Slide22B())
+        addScreen(Slide22C())
+
+        endTime = Date().time
+        println((endTime- startTime)/1000f)
+
+        setScreen<Slide22A>()
     }
 
     override fun keyDown(keycode: Int): Boolean {
