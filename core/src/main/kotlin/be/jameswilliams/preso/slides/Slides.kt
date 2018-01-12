@@ -10,8 +10,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup
+import com.badlogic.gdx.utils.Scaling
 import com.badlogic.gdx.utils.Scaling.*
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.rafaskoberg.gdx.typinglabel.TypingConfig
@@ -89,6 +91,7 @@ class Slide1 : KtxScreen, Slide {
     lateinit var udacityLogo: Texture
 
     var stage: Stage
+    lateinit var label:Label
 
     init {
         stage = Stage(ScreenViewport())
@@ -98,7 +101,7 @@ class Slide1 : KtxScreen, Slide {
 
     override fun setSlideContent() {
         udacityLogo = Texture(Gdx.files.internal("images/udacity-240-white.jpg"))
-        val label = headerLabel("I work at Udacity. I'm Curriculum Lead for Android.")
+        label = headerLabel("I work at Udacity. I'm Curriculum Lead for Android.")
         label.centerLabel()
         stage.addActor(label)
     }
@@ -112,7 +115,7 @@ class Slide1 : KtxScreen, Slide {
 
         batch.use {
             var x = (Gdx.graphics.width - udacityLogo.width) / 2f
-            it.draw(udacityLogo, x, 0f)
+            it.draw(udacityLogo, x, (Gdx.graphics.height/2 - (2*label.height + 50)))
         }
     }
 
@@ -377,7 +380,7 @@ class Slide13C : HeadlineSlide("RelativeLayout", Slide13B::class.java, Slide14::
 
 class Slide14 : HeadlineSlide("GridLayout", Slide13C::class.java, Slide15::class.java)
 
-class Slide15 : HeadlineSlide("ConstraintLayout", Slide14::class.java, Slide16::class.java)
+class Slide15 : HeadlineSlide("What is ConstraintLayout?", Slide14::class.java, Slide16::class.java)
 class Slide16 : BulletsSlide("ConstraintLayout",
         listOf("Support library", "Available on API 9+ (Gingerbread)", "")) {
     override fun backPressed() {
@@ -465,10 +468,9 @@ class Slide21 : BackgroundImageSlide(Gdx.files.internal("images/blueprint-view.p
         fit, Slide20::class.java, Slide22::class.java)
 
 class Slide22 : BackgroundImageSlide(Gdx.files.internal("images/attributes-view.png"),
-        fit, Slide21::class.java, Slide23::class.java)
+        fit, Slide21::class.java, Slide22A::class.java)
 
 // Constraint labels
-// TODO Add constant to move to center
 class Slide22A():KtxScreen, Slide {
     override fun backPressed() {
         if (showBaselineRectangle) {
@@ -849,15 +851,16 @@ class Slide36 : BackgroundImageSlide(Gdx.files.internal("images/constraints3.png
 class Slide37 : BackgroundImageSlide(Gdx.files.internal("images/constraints4.png"),
         fit, Slide36::class.java, Slide38::class.java)
 
-class Slide38 : HeadlineSlide("MATCH_PARENT", Slide37::class.java, Slide39::class.java)
+class Slide38 : HeadlineSlide("A word about MATCH_PARENT", Slide37::class.java, Slide40::class.java)
 
-class Slide39 : BackgroundImageSlide(Gdx.files.internal("images/margins.png"),
-        fit, Slide38::class.java, Slide40::class.java)
 
-class Slide40 : HeadlineSlide("Chains", Slide39::class.java, Slide41::class.java)
+class Slide40 : HeadlineSlide("Chains", Slide38::class.java, Slide40A::class.java)
+
+class Slide40A : DefinitionSlide("Chains",
+        "Can replace LinearLayouts in many cases", Slide40::class.java, Slide41::class.java)
 
 class Slide41 : BackgroundImageSlide(Gdx.files.internal("images/chain-blueprint.png"),
-        fit, Slide40::class.java, Slide42::class.java)
+        fit, Slide40A::class.java, Slide42::class.java)
 
 class Slide42 : BackgroundImageSlide(Gdx.files.internal("images/cycle-chain.png"),
         fit, Slide41::class.java, Slide43::class.java)
@@ -907,17 +910,19 @@ class Slide52 : CodeSlide("Barriers", slide52_code, Slide51::class.java, Slide53
 
 class Slide53 : HeadlineSlide("Groups", Slide52::class.java, Slide54::class.java)
 
+class Slide54 : BackgroundImageSlide(Gdx.files.internal("images/groups-example.png"), Scaling.fillY,
+        Slide53::class.java, Slide54A::class.java)
+
 val slide54_code = Gdx.files.internal("code/groups-code.txt.out").readString()
 
-class Slide54 : CodeSlide("Groups", slide54_code, Slide53::class.java, Slide55::class.java)
+class Slide54A : CodeSlide("Groups", slide54_code, Slide54::class.java, Slide55::class.java)
 
-// TODO add screenshot
+
 
 val slide55_code = Gdx.files.internal("code/groups-detail.txt.out").readString()
 
 class Slide55 : CodeSlide("Groups", slide55_code, Slide54::class.java, Slide56::class.java)
 
-// TODO Do this
 class Slide56 : HeadlineSlide("Placeholders", Slide55::class.java, Slide57::class.java)
 class Slide57 : HeadlineSlide("setContentId(...)", Slide56::class.java, Slide59::class.java)
 
@@ -983,7 +988,7 @@ class Slide60 : KtxScreen, Slide {
         Presentation.setScreen(Slide59::class.java)
     }
     override fun nextPressed() {
-        Presentation.setScreen(Slide60::class.java)
+        Presentation.setScreen(Slide61::class.java)
     }
 
 

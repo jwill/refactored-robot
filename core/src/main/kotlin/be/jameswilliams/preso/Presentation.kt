@@ -69,7 +69,6 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         addScreen(Slide36())
         addScreen(Slide37())
         addScreen(Slide38())
-        addScreen(Slide39())
 
         addScreen(Slide40())
         addScreen(Slide41())
@@ -108,11 +107,13 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         addScreen(Slide22A())
         addScreen(Slide22B())
         addScreen(Slide22C())
+        addScreen(Slide54A())
+        addScreen(Slide40A())
 
         endTime = Date().time
         println((endTime- startTime)/1000f)
 
-        setScreen<Slide50>()
+        setScreen<Slide0>()
     }
 
     override fun keyDown(keycode: Int): Boolean {
