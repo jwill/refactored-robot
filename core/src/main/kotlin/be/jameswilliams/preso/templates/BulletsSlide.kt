@@ -15,7 +15,7 @@ import com.rafaskoberg.gdx.typinglabel.TypingConfig
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
 
-open class BulletsSlide(val title:String, val bulletItems:List<String>, debug:Boolean = true) : KtxScreen, Slide {
+open class BulletsSlide(val title:String, val bulletItems:List<String>, debug:Boolean = false) : KtxScreen, Slide {
     var table = Table()
     var verticalGroup = VerticalGroup()
     val batch = SpriteBatch()

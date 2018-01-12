@@ -199,7 +199,7 @@ class Slide11 : HeadlineSlide("Why is this Important?", Slide10A::class.java, Sl
 
 class Slide12 : HeadlineSlide("16ms*", Slide11::class.java, Slide13::class.java)
 
-class Slide13 : HeadlineSlide("What layouts are prone to double taxation?", Slide12::class.java, Slide14::class.java)
+class Slide13 : HeadlineSlide("What layouts are prone to double taxation?", Slide12::class.java, Slide13A::class.java)
 
 //Vertical LinearLayout
 class Slide13A : KtxScreen, Slide {
@@ -278,11 +278,11 @@ class Slide13A : KtxScreen, Slide {
     }
 
     override fun nextPressed() {
-
+        Presentation.setScreen(Slide13B::class.java)
     }
 
     override fun backPressed() {
-
+        Presentation.setScreen(Slide13::class.java)
     }
 }
 
@@ -375,7 +375,7 @@ class Slide13B : KtxScreen, Slide {
 
 class Slide13C : HeadlineSlide("RelativeLayout", Slide13B::class.java, Slide14::class.java)
 
-class Slide14 : HeadlineSlide("GridLayout", Slide13::class.java, Slide15::class.java)
+class Slide14 : HeadlineSlide("GridLayout", Slide13C::class.java, Slide15::class.java)
 
 class Slide15 : HeadlineSlide("ConstraintLayout", Slide14::class.java, Slide16::class.java)
 class Slide16 : BulletsSlide("ConstraintLayout",
@@ -805,7 +805,7 @@ class Slide22C():BulletsSlide("Relative Positioning Constraints",
 }
 
 // Removing a constraint
-class Slide23 : HeadlineSlide("Clearing Constraints", Slide22::class.java, Slide24::class.java)
+class Slide23 : HeadlineSlide("Clearing Constraints", Slide22C::class.java, Slide24::class.java)
 
 class Slide24 : BackgroundImageSlide(Gdx.files.internal("images/show-initial-constraints.png"),
         fit, Slide23::class.java, Slide25::class.java)
@@ -911,6 +911,8 @@ val slide54_code = Gdx.files.internal("code/groups-code.txt.out").readString()
 
 class Slide54 : CodeSlide("Groups", slide54_code, Slide53::class.java, Slide55::class.java)
 
+// TODO add screenshot
+
 val slide55_code = Gdx.files.internal("code/groups-detail.txt.out").readString()
 
 class Slide55 : CodeSlide("Groups", slide55_code, Slide54::class.java, Slide56::class.java)
@@ -986,6 +988,6 @@ class Slide60 : KtxScreen, Slide {
 
 
 }
-class Slide61 : CodeSlide("Circular Positioning",Gdx.files.internal("code/circular-code.txt.out").readString(),Slide60::class.java, null)
+class Slide61 : CodeSlide("Circular Positioning",Gdx.files.internal("code/circular-code.txt.out").readString(),Slide60::class.java, EndSlide::class.java)
 
-class SlideXX : HeadlineSlide("Any Questions?")
+class EndSlide : HeadlineSlide("Any Questions?")
