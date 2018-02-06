@@ -14,7 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup
 import com.badlogic.gdx.utils.Scaling
-import com.badlogic.gdx.utils.Scaling.*
+import com.badlogic.gdx.utils.Scaling.fit
+import com.badlogic.gdx.utils.Scaling.stretchY
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.rafaskoberg.gdx.typinglabel.TypingConfig
 import ktx.app.KtxScreen
@@ -48,7 +49,7 @@ class Slide0() : KtxScreen, Slide {
         twitterIcon.setFontScale(0.5f)
         title.centerLabel()
         name.centerLabel()
-        name.y -= name.height *2
+        name.y -= name.height * 2
         twitterId.centerLabel()
         twitterId.y -= (twitterId.height * 3)
 
@@ -91,7 +92,7 @@ class Slide1 : KtxScreen, Slide {
     lateinit var udacityLogo: Texture
 
     var stage: Stage
-    lateinit var label:Label
+    lateinit var label: Label
 
     init {
         stage = Stage(ScreenViewport())
@@ -115,7 +116,7 @@ class Slide1 : KtxScreen, Slide {
 
         batch.use {
             var x = (Gdx.graphics.width - udacityLogo.width) / 2f
-            it.draw(udacityLogo, x, (Gdx.graphics.height/2 - (2*label.height + 50)))
+            it.draw(udacityLogo, x, (Gdx.graphics.height / 2 - (2 * label.height + 50)))
         }
     }
 
@@ -246,8 +247,8 @@ class Slide13A : KtxScreen, Slide {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(Color.LIGHT_GRAY)
-            translate(windowWidth/2f - 300, windowHeight/2f, 0f)
-            rect(0f,0f, currentWidth, boxHeight)
+            translate(windowWidth / 2f - 300, windowHeight / 2f, 0f)
+            rect(0f, 0f, currentWidth, boxHeight)
             end()
         }
 
@@ -255,8 +256,8 @@ class Slide13A : KtxScreen, Slide {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(Color.LIGHT_GRAY)
-            translate(windowWidth/2f - 300, windowHeight/2f - boxHeight - 16f, 0f)
-            rect(0f,0f, currentWidth, boxHeight)
+            translate(windowWidth / 2f - 300, windowHeight / 2f - boxHeight - 16f, 0f)
+            rect(0f, 0f, currentWidth, boxHeight)
             end()
         }
 
@@ -264,8 +265,8 @@ class Slide13A : KtxScreen, Slide {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(Color.RED)
-            translate(windowWidth/2f - 300, windowHeight/2f - boxHeight * 2 - 16f * 2, 0f)
-            rect(0f,0f, endingWidth, boxHeight)
+            translate(windowWidth / 2f - 300, windowHeight / 2f - boxHeight * 2 - 16f * 2, 0f)
+            rect(0f, 0f, endingWidth, boxHeight)
             end()
         }
 
@@ -331,17 +332,17 @@ class Slide13B : KtxScreen, Slide {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(Color.LIGHT_GRAY)
-            translate(windowWidth/2f - 300, windowHeight/2f, 0f)
-            rect(0f,0f, staticWidth, boxHeight)
+            translate(windowWidth / 2f - 300, windowHeight / 2f, 0f)
+            rect(0f, 0f, staticWidth, boxHeight)
             end()
         }
 
         with(renderer) {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
-            setColor(1f,0f,0f,1f)
-            translate(windowWidth/2f - 300 + 16 + staticWidth, windowHeight/2f, 0f)
-            rect(0f,0f, currentWidth, boxHeight)
+            setColor(1f, 0f, 0f, 1f)
+            translate(windowWidth / 2f - 300 + 16 + staticWidth, windowHeight / 2f, 0f)
+            rect(0f, 0f, currentWidth, boxHeight)
             end()
         }
 
@@ -349,8 +350,8 @@ class Slide13B : KtxScreen, Slide {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(Color.LIGHT_GRAY)
-            translate(windowWidth/2f - 300 + 16 + staticWidth + currentWidth + 16, windowHeight/2f, 0f)
-            rect(0f,0f, staticWidth, boxHeight)
+            translate(windowWidth / 2f - 300 + 16 + staticWidth + currentWidth + 16, windowHeight / 2f, 0f)
+            rect(0f, 0f, staticWidth, boxHeight)
             end()
         }
 
@@ -471,7 +472,7 @@ class Slide22 : BackgroundImageSlide(Gdx.files.internal("images/attributes-view.
         fit, Slide21::class.java, Slide22A::class.java)
 
 // Constraint labels
-class Slide22A():KtxScreen, Slide {
+class Slide22A() : KtxScreen, Slide {
     override fun backPressed() {
         if (showBaselineRectangle) {
             showBaselineRectangle = false
@@ -487,6 +488,7 @@ class Slide22A():KtxScreen, Slide {
             Presentation.setScreen(Slide22::class.java)
         }
     }
+
     override fun nextPressed() {
         if (showTopRectangle == false) {
             showTopRectangle = true
@@ -515,7 +517,7 @@ class Slide22A():KtxScreen, Slide {
 
     val offset = 300f
     val halfWindowWidth = Gdx.graphics.width / 2f - offset
-    val halfWindowHeight = Gdx.graphics.height /2f
+    val halfWindowHeight = Gdx.graphics.height / 2f
     val boxHeight = 250f
     val boxWidth = 500f
 
@@ -536,18 +538,18 @@ class Slide22A():KtxScreen, Slide {
 
         // Position A label
         label.centerLabel()
-        label.x =  halfWindowWidth
-        label.x += boxWidth/2
-        label.y += boxHeight/2
+        label.x = halfWindowWidth
+        label.x += boxWidth / 2
+        label.y += boxHeight / 2
 
         labelBottom.x = halfWindowWidth - labelBottom.width
-        labelBottom.y = halfWindowHeight - labelBottom.height/2
+        labelBottom.y = halfWindowHeight - labelBottom.height / 2
 
         labelTop.x = halfWindowWidth - labelTop.width - 40f
-        labelTop.y = halfWindowHeight - labelTop.height/2 +240f
+        labelTop.y = halfWindowHeight - labelTop.height / 2 + 240f
 
         labelBaseline.x = halfWindowWidth + labelBaseline.width + 250f
-        labelBaseline.y = halfWindowHeight - labelBaseline.height/2 +81f
+        labelBaseline.y = halfWindowHeight - labelBaseline.height / 2 + 81f
 
         labelBottom.setFontScale(0.9f)
         labelTop.setFontScale(0.9f)
@@ -578,7 +580,7 @@ class Slide22A():KtxScreen, Slide {
             identity()
             setColor(0f, 1f, 0f, 1f)
             translate(halfWindowWidth, halfWindowHeight, 0f)
-            rect(0f,0f, boxWidth, boxHeight)
+            rect(0f, 0f, boxWidth, boxHeight)
             end()
         }
 
@@ -630,7 +632,7 @@ class Slide22A():KtxScreen, Slide {
     }
 }
 
-class Slide22B():KtxScreen, Slide {
+class Slide22B() : KtxScreen, Slide {
     override fun backPressed() {
         if (showRightRectangle == true) {
             showRightRectangle = false
@@ -645,6 +647,7 @@ class Slide22B():KtxScreen, Slide {
             Presentation.setScreen(Slide22A::class.java)
         }
     }
+
     override fun nextPressed() {
         if (showLeftRectangle == false) {
             showLeftRectangle = true
@@ -672,7 +675,7 @@ class Slide22B():KtxScreen, Slide {
 
     val offset = 300f
     val halfWindowWidth = Gdx.graphics.width / 2f - offset
-    val halfWindowHeight = Gdx.graphics.height /2f
+    val halfWindowHeight = Gdx.graphics.height / 2f
     val boxHeight = 250f
     val boxWidth = 500f
 
@@ -692,25 +695,25 @@ class Slide22B():KtxScreen, Slide {
 
         // Position A label
         label.centerLabel()
-        label.x =  halfWindowWidth
-        label.x += boxWidth/2
-        label.y += boxHeight/2
+        label.x = halfWindowWidth
+        label.x += boxWidth / 2
+        label.y += boxHeight / 2
 
         labelLeft.centerLabel()
         labelLeft.x = halfWindowWidth - labelLeft.width
-        labelLeft.y = halfWindowHeight - labelLeft.height/2
+        labelLeft.y = halfWindowHeight - labelLeft.height / 2
 
         labelStart.centerLabel()
         labelStart.x = halfWindowWidth - labelStart.width
-        labelStart.y = halfWindowHeight - labelStart.height/2 - 90f
+        labelStart.y = halfWindowHeight - labelStart.height / 2 - 90f
 
         labelRight.centerLabel()
-        labelRight.x = halfWindowWidth - labelRight.width + boxWidth +180f
-        labelRight.y = halfWindowHeight - labelRight.height/2
+        labelRight.x = halfWindowWidth - labelRight.width + boxWidth + 180f
+        labelRight.y = halfWindowHeight - labelRight.height / 2
 
         labelEnd.centerLabel()
-        labelEnd.x = halfWindowWidth - labelEnd.width + boxWidth +180f
-        labelEnd.y = halfWindowHeight - labelEnd.height/2 - 90f
+        labelEnd.x = halfWindowWidth - labelEnd.width + boxWidth + 180f
+        labelEnd.y = halfWindowHeight - labelEnd.height / 2 - 90f
 
         labelLeft.setFontScale(0.9f)
         labelRight.setFontScale(0.9f)
@@ -744,7 +747,7 @@ class Slide22B():KtxScreen, Slide {
             identity()
             setColor(0f, 1f, 0f, 1f)
             translate(halfWindowWidth, halfWindowHeight, 0f)
-            rect(0f,0f, boxWidth, boxHeight)
+            rect(0f, 0f, boxWidth, boxHeight)
             end()
         }
 
@@ -784,13 +787,13 @@ class Slide22B():KtxScreen, Slide {
     }
 }
 
-class Slide22C():BulletsSlide("Relative Positioning Constraints",
+class Slide22C() : BulletsSlide("Relative Positioning Constraints",
         listOf<String>(
                 "layout_constraint[GREEN]SourceConstraint[]_to[RED]TargetConstraint[]Of",
                 "layout_constraintStart_toEndOf",
                 "layout_constraintRight_toRightOf",
                 ""
-        )){
+        )) {
     override fun backPressed() {
         var result = super.bullets.goBack()
         if (result == false) {
@@ -857,10 +860,28 @@ class Slide38 : HeadlineSlide("A word about MATCH_PARENT", Slide37::class.java, 
 class Slide40 : HeadlineSlide("Chains", Slide38::class.java, Slide40A::class.java)
 
 class Slide40A : DefinitionSlide("Chains",
-        "Can replace LinearLayouts in many cases", Slide40::class.java, Slide41::class.java)
+        "Views linked together with bidirectional positional constraints. Can replace LinearLayouts in many cases.", Slide40::class.java, Slide41::class.java) {
+    override fun setSlideContent() {
+        val titleLabel = headerLabel(title)
+        val definitionLabel = headerLabel(definition)
+
+        definitionLabel.setFontScale(0.75f)
+
+        titleLabel.centerX()
+        titleLabel.y = Gdx.graphics.height - titleLabel.height
+
+        definitionLabel.width = Gdx.graphics.width - 256f
+        definitionLabel.centerLabel()
+        definitionLabel.setWrap(true)
+
+        stage.addActor(titleLabel)
+        stage.addActor(definitionLabel)
+    }
+}
 
 class Slide41 : BackgroundImageSlide(Gdx.files.internal("images/chain-blueprint.png"),
         fit, Slide40A::class.java, Slide42::class.java)
+
 
 class Slide42 : BackgroundImageSlide(Gdx.files.internal("images/cycle-chain.png"),
         fit, Slide41::class.java, Slide43::class.java)
@@ -906,6 +927,7 @@ class Slide51 : CodeSlide("Barriers", slide51_code, Slide50::class.java, Slide52
 
 
 val slide52_code = Gdx.files.internal("code/barrier-code.txt.out").readString()
+
 class Slide52 : CodeSlide("Barriers", slide52_code, Slide51::class.java, Slide53::class.java)
 
 class Slide53 : HeadlineSlide("Groups", Slide52::class.java, Slide54::class.java)
@@ -916,7 +938,6 @@ class Slide54 : BackgroundImageSlide(Gdx.files.internal("images/groups-example.p
 val slide54_code = Gdx.files.internal("code/groups-code.txt.out").readString()
 
 class Slide54A : CodeSlide("Groups", slide54_code, Slide54::class.java, Slide55::class.java)
-
 
 
 val slide55_code = Gdx.files.internal("code/groups-detail.txt.out").readString()
@@ -956,7 +977,7 @@ class Slide60 : KtxScreen, Slide {
         shapeRenderer.setColor(Color.ORANGE)
         shapeRenderer.identity()
         // Place circle in center
-        shapeRenderer.translate(Gdx.graphics.width/2f, Gdx.graphics.height / 2f, 0f)
+        shapeRenderer.translate(Gdx.graphics.width / 2f, Gdx.graphics.height / 2f, 0f)
         shapeRenderer.circle(0f, 0f, 50f)
         shapeRenderer.end()
 
@@ -968,8 +989,8 @@ class Slide60 : KtxScreen, Slide {
         if (degrees > 360f)
             degrees = 0f
 
-        shapeRenderer.translate(Gdx.graphics.width/2f, Gdx.graphics.height / 2f, 0f)
-        shapeRenderer.rotate(0f,0f, 1f, degrees)
+        shapeRenderer.translate(Gdx.graphics.width / 2f, Gdx.graphics.height / 2f, 0f)
+        shapeRenderer.rotate(0f, 0f, 1f, degrees)
 
         shapeRenderer.setColor(Color.CYAN)
         shapeRenderer.circle(250f, 0f, 10f)
@@ -987,12 +1008,14 @@ class Slide60 : KtxScreen, Slide {
     override fun backPressed() {
         Presentation.setScreen(Slide59::class.java)
     }
+
     override fun nextPressed() {
         Presentation.setScreen(Slide61::class.java)
     }
 
 
 }
-class Slide61 : CodeSlide("Circular Positioning",Gdx.files.internal("code/circular-code.txt.out").readString(),Slide60::class.java, EndSlide::class.java)
+
+class Slide61 : CodeSlide("Circular Positioning", Gdx.files.internal("code/circular-code.txt.out").readString(), Slide60::class.java, EndSlide::class.java)
 
 class EndSlide : HeadlineSlide("Any Questions?")

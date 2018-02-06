@@ -37,8 +37,6 @@ open class DefinitionSlide(val title:String, val definition:String,
         val definitionLabel = headerLabel(definition)
         definitionLabel.setWrap(true)
 
-        TypingConfig.FORCE_COLOR_MARKUP_BY_DEFAULT = true
-
         titleLabel.centerX()
         titleLabel.y = Gdx.graphics.height - titleLabel.height
         definitionLabel.centerLabel()

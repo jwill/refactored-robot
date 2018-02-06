@@ -69,19 +69,20 @@ class DefaultTheme:Theme() {
 
         /* http://www.fontawesomecheatsheet.com/
          * Android          \uf17b
+         * Github           \uf09b
          * RSS              \uf09e
          * picture outline  \uf03e
          * twitter          \uf099
          * circle (bullet)  \uf111
          */
-        iconFont = createStyle(Gdx.files.internal("fonts/fontawesome-webfont.ttf"), 128, "\uf17b\uf09e\uf03e\uf099\uf111")
+        iconFont = createStyle(Gdx.files.internal("fonts/fontawesome-webfont.ttf"), 128, "\uf17b\uf09b\uf09e\uf03e\uf099\uf111")
     }
 }
 object IconFontConstants {
     val ANDROID = "\uf17b"
     val TWITTER = "\uf099"
     val BULLET = "\uf111"
-
+    val GITHUB = "\uf09b"
 }
 
 fun Label.centerLabel() {
