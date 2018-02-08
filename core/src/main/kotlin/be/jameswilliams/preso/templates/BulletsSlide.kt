@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.rafaskoberg.gdx.typinglabel.TypingConfig
+import ktx.actors.plus
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
 
@@ -55,7 +56,7 @@ open class BulletsSlide(val title:String, val bulletItems:List<String>, debug:Bo
 
         table.align(Align.top)
         // Add table to stage
-        stage.addActor(table)
+        stage + table
     }
 
     override fun render(delta: Float) {

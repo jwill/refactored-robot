@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.Scaling
 import com.badlogic.gdx.utils.viewport.ScreenViewport
+import ktx.actors.plus
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
 
@@ -32,7 +33,7 @@ open class BackgroundImageSlide(val filehandle: FileHandle, val scale:Scaling,
         var y = (Gdx.graphics.height - image.height) / 2f
         image.x = x
         image.y = y
-        stage.addActor(image)
+        stage + image
     }
 
     override fun render(delta: Float) {

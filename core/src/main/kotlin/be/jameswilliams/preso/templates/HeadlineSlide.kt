@@ -7,6 +7,7 @@ import be.jameswilliams.preso.headerLabel
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.viewport.ScreenViewport
+import ktx.actors.plus
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
 
@@ -26,7 +27,7 @@ open class HeadlineSlide(val title: String,
     override fun setSlideContent() {
         val label = headerLabel(title)
         label.centerLabel()
-        stage.addActor(label)
+        stage + label
     }
 
     override fun render(delta: Float) {

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.rafaskoberg.gdx.typinglabel.TypingConfig
+import ktx.actors.plus
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
 
@@ -42,8 +43,8 @@ open class CodeSlide(val title:String, val sourceCode:String,
         titleLabel.y = Gdx.graphics.height - titleLabel.height - 16f
         codeLabel.centerLabel()
 
-        stage.addActor(titleLabel)
-        stage.addActor(codeLabel)
+        stage + titleLabel
+        stage + codeLabel
     }
 
     override fun render(delta: Float) {

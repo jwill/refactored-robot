@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.rafaskoberg.gdx.typinglabel.TypingConfig
+import ktx.actors.plus
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
 
@@ -50,8 +51,8 @@ open class DefinitionSlide(val title:String, val definition:String,
 
         definitionLabel.setWrap(true)
 
-        stage.addActor(titleLabel)
-        stage.addActor(definitionLabel)
+        stage + titleLabel
+        stage + definitionLabel
     }
 
     override fun render(delta: Float) {
