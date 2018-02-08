@@ -35,11 +35,20 @@ open class DefinitionSlide(val title:String, val definition:String,
     override fun setSlideContent() {
         val titleLabel = headerLabel(title)
         val definitionLabel = headerLabel(definition)
-        definitionLabel.setWrap(true)
+
+        definitionLabel.setFontScale(0.75f)
 
         titleLabel.centerX()
-        titleLabel.y = Gdx.graphics.height - titleLabel.height
+        titleLabel.y = Gdx.graphics.height - titleLabel.height -16f
+
+        val maxLabelWidth = Gdx.graphics.width - 256f
+        if (definitionLabel.width > maxLabelWidth) {
+            definitionLabel.width = maxLabelWidth
+        }
         definitionLabel.centerLabel()
+
+
+        definitionLabel.setWrap(true)
 
         stage.addActor(titleLabel)
         stage.addActor(definitionLabel)

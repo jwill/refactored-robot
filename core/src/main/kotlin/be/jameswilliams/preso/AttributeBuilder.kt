@@ -10,6 +10,41 @@ object Debugger {
 }
 
 // Helper functions to draw things in the Attributes view re-creation
+object ChainBuilder {
+    val shapeRenderer = ShapeRenderer()
+
+    fun makeChainLink( width: Float, height:Float, location:Vector2 = Vector2(0f,0f),
+                       color: Color = Color.BLUE, color2: Color = Color.BLACK) {
+        val linkLength = 50f
+        val heightOffset = height * 0.6f
+        val halfHeightOffset = (height - heightOffset) / 2f
+        val widthOffset = linkLength * 0.9f
+        var currentX = 0f
+
+        with(shapeRenderer) {
+            begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled)
+            identity()
+            translate(location.x, location.y, 0f)
+            while(currentX < width) {
+                setColor(com.badlogic.gdx.graphics.Color.BLUE)
+                ellipse(currentX,0f, linkLength,height)
+                setColor(com.badlogic.gdx.graphics.Color.BLACK)
+                ellipse(currentX+halfHeightOffset,halfHeightOffset, widthOffset,heightOffset)
+                currentX += linkLength
+            }
+            identity()
+            end()
+        }
+    }
+}
+
+/*
+example in render function:
+
+AttributeBuilder.drawAttributeView(Vector2(200f, 200f))
+ */
+
+
 object AttributeBuilder {
     var defaultConstraints = arrayOf<ConstraintType>(
             ConstraintType.WRAP_CONTENT,

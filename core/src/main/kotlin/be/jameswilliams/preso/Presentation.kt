@@ -11,6 +11,9 @@ import ktx.app.KtxGame
 import ktx.app.KtxInputAdapter
 import ktx.app.KtxScreen
 import java.util.*
+import com.badlogic.gdx.InputMultiplexer
+
+
 
 
 object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
@@ -19,8 +22,16 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
     var startTime:Long = 0
     var endTime:Long = 0
 
+    // We want both our base application and individual stages to be able to respond to input
+    //
+    val multiplexer = InputMultiplexer()
+
     override fun create() {
-        Gdx.input.inputProcessor = this
+
+        // This class is our core input processor but other objects might also subscribe to
+        // input triggers as well
+        multiplexer.addProcessor(this)
+        Gdx.input.inputProcessor = multiplexer
 
         theme = DefaultTheme()
         startTime = Date().time
@@ -74,7 +85,6 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         addScreen(Slide41())
         addScreen(Slide42())
         addScreen(Slide43())
-        addScreen(Slide44())
 
         addScreen(Slide45())
         addScreen(Slide46())
@@ -110,10 +120,14 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         addScreen(Slide54A())
         addScreen(Slide40A())
 
+        addScreen(Slide41A())
+        addScreen(Slide47A())
+        addScreen(Slide53A())
+
         endTime = Date().time
         println((endTime- startTime)/1000f)
 
-        setScreen<Slide0>()
+        setScreen<Slide49>()
     }
 
     override fun keyDown(keycode: Int): Boolean {

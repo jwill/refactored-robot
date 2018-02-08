@@ -39,7 +39,7 @@ open class CodeSlide(val title:String, val sourceCode:String,
         TypingConfig.FORCE_COLOR_MARKUP_BY_DEFAULT = true
 
         titleLabel.centerX()
-        titleLabel.y = Gdx.graphics.height - titleLabel.height
+        titleLabel.y = Gdx.graphics.height - titleLabel.height - 16f
         codeLabel.centerLabel()
 
         stage.addActor(titleLabel)
