@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
@@ -379,6 +380,8 @@ class Slide13B : KtxScreen, Slide {
 
 class Slide13C : HeadlineSlide("RelativeLayout", Slide13B::class.java, Slide14::class.java)
 
+// TODO Insert Relative and Linear combined example.
+
 class Slide14 : HeadlineSlide("GridLayout", Slide13C::class.java, Slide15::class.java)
 
 class Slide15 : HeadlineSlide("What is ConstraintLayout?", Slide14::class.java, Slide16::class.java)
@@ -534,7 +537,7 @@ class Slide22A() : KtxScreen, Slide {
         TypingConfig.FORCE_COLOR_MARKUP_BY_DEFAULT = true
 
         titleLabel.centerX()
-        titleLabel.y = Gdx.graphics.height - titleLabel.height
+        titleLabel.y = Gdx.graphics.height - titleLabel.height - 16f
 
         // Position A label
         label.centerLabel()
@@ -691,7 +694,7 @@ class Slide22B() : KtxScreen, Slide {
         TypingConfig.FORCE_COLOR_MARKUP_BY_DEFAULT = true
 
         titleLabel.centerX()
-        titleLabel.y = Gdx.graphics.height - titleLabel.height
+        titleLabel.y = Gdx.graphics.height - titleLabel.height - 16f
 
         // Position A label
         label.centerLabel()
@@ -842,17 +845,109 @@ class Slide32 : BackgroundImageSlide(Gdx.files.internal("images/add-constraint5.
 class Slide33 : HeadlineSlide("Understanding The New Attributes View",
         Slide32::class.java, Slide34::class.java)
 
-class Slide34 : BackgroundImageSlide(Gdx.files.internal("images/constraints1.png"),
-        fit, Slide33::class.java, Slide35::class.java)
 
-class Slide35 : BackgroundImageSlide(Gdx.files.internal("images/constraints2.png"),
-        fit, Slide34::class.java, Slide36::class.java)
+class Slide34 : ConstraintSlide(AttributeBuilder.defaultConstraints, "wrap_content", "wrap_content",
+        Slide33::class.java, Slide35::class.java) {
+    override fun render(delta: Float) {
+        super.render(delta)
 
-class Slide36 : BackgroundImageSlide(Gdx.files.internal("images/constraints3.png"),
-        fit, Slide35::class.java, Slide37::class.java)
+        with(shapeRenderer) {
+            begin(ShapeRenderer.ShapeType.Filled)
+            setColor(Color.PINK)
+            rect(400f, halfY, 200f, 80f)
+            end()
+        }
+        // AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY + 20f),Vector2(250f, 50f), color=Color.YELLOW)
+        // AttributeBuilder.drawSquigglyPipe(Vector2(505f, halfY + 20f),Vector2(250f, 50f), color=Color.YELLOW)
+        // Constraint Handles
+        AttributeBuilder.drawConstraintHandle(Vector2(380f, halfY + 20f), radius = 20f, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(Vector2(580f, halfY + 20f), radius = 20f, color2 = Color.BLUE)
 
-class Slide37 : BackgroundImageSlide(Gdx.files.internal("images/constraints4.png"),
-        fit, Slide36::class.java, Slide38::class.java)
+        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
+    }
+}
+
+val constraints = arrayOf(AttributeBuilder.ConstraintType.WRAP_CONTENT,
+        AttributeBuilder.ConstraintType.WRAP_CONTENT,
+        AttributeBuilder.ConstraintType.EXACT_SIZE,
+        AttributeBuilder.ConstraintType.EXACT_SIZE
+)
+
+class Slide35 : ConstraintSlide(constraints, "wrap_content", "19dp",
+        Slide34::class.java, Slide36::class.java) {
+    override fun render(delta: Float) {
+        super.render(delta)
+
+        with(shapeRenderer) {
+            begin(ShapeRenderer.ShapeType.Filled)
+            setColor(Color.PINK)
+            rect(400f, halfY, 200f, 80f)
+            end()
+        }
+        // AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY + 20f),Vector2(250f, 50f), color=Color.YELLOW)
+        // AttributeBuilder.drawSquigglyPipe(Vector2(505f, halfY + 20f),Vector2(250f, 50f), color=Color.YELLOW)
+        // Constraint Handles
+        AttributeBuilder.drawConstraintHandle(Vector2(380f, halfY + 20f), radius = 20f, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(Vector2(580f, halfY + 20f), radius = 20f, color2 = Color.BLUE)
+
+        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
+    }
+}
+
+class Slide36 : ConstraintSlide(constraints, "wrap_content", "19p",
+        Slide35::class.java, Slide37::class.java) {
+    override fun render(delta: Float) {
+        super.render(delta)
+
+        with(shapeRenderer) {
+            begin(ShapeRenderer.ShapeType.Filled)
+            setColor(Color.PINK)
+            rect(400f, halfY, 200f, 80f)
+            end()
+        }
+
+
+        // Constraint Handles
+        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
+
+
+        AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY + 20f), Vector2(395f, 50f), color = Color.YELLOW)
+        AttributeBuilder.drawSquigglyPipe(Vector2(600f, halfY + 20f), Vector2(420f, 50f), color = Color.YELLOW)
+    }
+}
+
+val slide37_constraints = arrayOf(
+        AttributeBuilder.ConstraintType.CONSTRAINT,
+        AttributeBuilder.ConstraintType.CONSTRAINT,
+        AttributeBuilder.ConstraintType.EXACT_SIZE,
+        AttributeBuilder.ConstraintType.EXACT_SIZE
+)
+
+class Slide37 : ConstraintSlide(slide37_constraints, "match_constraint", "19p",
+        Slide36::class.java, Slide38::class.java) {
+    override fun render(delta: Float) {
+        super.render(delta)
+
+        with(shapeRenderer) {
+            begin(ShapeRenderer.ShapeType.Filled)
+            setColor(Color.PINK)
+            rect(65f, halfY, 900f, 80f)
+            end()
+        }
+
+        // Constraint Handles
+        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
+
+
+        AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY + 20f), Vector2(60f, 50f), color = Color.YELLOW)
+        AttributeBuilder.drawSquigglyPipe(Vector2(965f, halfY + 20f), Vector2(55f, 50f), color = Color.YELLOW)
+    }
+}
+
 
 class Slide38 : HeadlineSlide("A word about MATCH_PARENT", Slide37::class.java, Slide40::class.java)
 
@@ -860,39 +955,81 @@ class Slide38 : HeadlineSlide("A word about MATCH_PARENT", Slide37::class.java, 
 class Slide40 : HeadlineSlide("Chains", Slide38::class.java, Slide40A::class.java)
 
 class Slide40A : DefinitionSlide("Chains",
-        "Views linked together with bidirectional positional constraints. Can replace LinearLayouts in many cases.", Slide40::class.java, Slide41::class.java) {
-    override fun setSlideContent() {
-        val titleLabel = headerLabel(title)
-        val definitionLabel = headerLabel(definition)
-
-        definitionLabel.setFontScale(0.75f)
-
-        titleLabel.centerX()
-        titleLabel.y = Gdx.graphics.height - titleLabel.height
-
-        definitionLabel.width = Gdx.graphics.width - 256f
-        definitionLabel.centerLabel()
-        definitionLabel.setWrap(true)
-
-        stage.addActor(titleLabel)
-        stage.addActor(definitionLabel)
-    }
-}
+        "Views linked together with bidirectional positional constraints. Can replace LinearLayouts in many cases.", Slide40::class.java, Slide41::class.java)
 
 class Slide41 : BackgroundImageSlide(Gdx.files.internal("images/chain-blueprint.png"),
-        fit, Slide40A::class.java, Slide42::class.java)
+        fit, Slide40A::class.java, Slide41A::class.java)
 
+class Slide41A : KtxScreen, Slide {
+    val shapeRenderer = ShapeRenderer()
+    val stage = Stage(ScreenViewport())
+
+
+    init {
+        Presentation.multiplexer.addProcessor(stage)
+        setSlideContent()
+        //table.debugAll()
+    }
+
+    override fun setSlideContent() {
+        //val slider = Slider(0f,100f, 1f, false, Skin())
+        //slider.setPosition(200f,200f)
+
+        //table.center()
+
+        //table.add(slider).minWidth(500f)
+/*        var table = ktx.vis.table {
+            isTransform = true
+            slider (vertical = true){
+                width = 600f
+                height = 300f
+                style.knob.minWidth = 50f
+                style.knobDown.minWidth = 50f
+                style.knobOver.minWidth = 50f
+
+                onChange {
+                    Gdx.app.log("UITest", "slider: " + this.getValue());
+                }
+
+            }.cell(grow = true)
+            setPosition(400f,400f)
+            height = 300f
+            width = 900f
+        }*/
+        //stage.addActor(table)
+
+
+        //stage.addActor(table)
+    }
+
+    override fun render(delta: Float) {
+        super.render(delta)
+        val bg = Presentation.theme.backgroundColor
+        clearScreen(bg.r, bg.g, bg.b, bg.a)
+
+
+        //AttributeBuilder.drawAttributeView(Vector2(200f, 200f))
+        stage.act()
+        stage.draw()
+    }
+
+    override fun dispose() {
+        super.dispose()
+        stage.dispose()
+        shapeRenderer.dispose()
+        Presentation.multiplexer.removeProcessor(stage)
+
+    }
+}
 
 class Slide42 : BackgroundImageSlide(Gdx.files.internal("images/cycle-chain.png"),
         fit, Slide41::class.java, Slide43::class.java)
 
 class Slide43 : BackgroundImageSlide(Gdx.files.internal("images/chain-types.png"),
-        fit, Slide42::class.java, Slide44::class.java)
+        fit, Slide42::class.java, Slide45::class.java)
 
-class Slide44 : HeadlineSlide("How many Designers in the room?",
-        Slide43::class.java, Slide45::class.java)
 
-class Slide45 : HeadlineSlide("And Developers?", Slide44::class.java, Slide46::class.java)
+class Slide45 : HeadlineSlide("Virtual Helper Objects", Slide43::class.java, Slide46::class.java)
 
 class Slide46 : BulletsSlide("Virtual Helper Objects", listOf("Guidelines", "Barriers", "Groups", "")) {
     override fun backPressed() {
@@ -910,10 +1047,14 @@ class Slide46 : BulletsSlide("Virtual Helper Objects", listOf("Guidelines", "Bar
     }
 }
 
-class Slide47 : HeadlineSlide("Guidelines", Slide46::class.java, Slide48::class.java)
+class Slide47 : HeadlineSlide("Guidelines", Slide46::class.java, Slide47A::class.java)
+
+val slide47A_definition = "Allow multiple widgets to be aligned from a single virtual object"
+
+class Slide47A : DefinitionSlide("Guidelines", slide47A_definition, Slide47::class.java, Slide48::class.java)
 
 class Slide48 : BackgroundImageSlide(Gdx.files.internal("images/guidelines-blueprint.png"),
-        fit, Slide47::class.java, Slide49::class.java)
+        fit, Slide47A::class.java, Slide49::class.java)
 
 val codeString = Gdx.files.internal("code/guidelines.txt.out").readString()
 
@@ -921,19 +1062,23 @@ class Slide49 : CodeSlide("Guidelines", codeString, Slide48::class.java, Slide50
 
 class Slide50 : HeadlineSlide("Barriers", Slide49::class.java, Slide51::class.java)
 
-val slide51_code = Gdx.files.internal("code/barrier-code.txt.out").readString()
+val slide51_definition = "Allows widgets to be aligned based on the one with the largest value"
 
-class Slide51 : CodeSlide("Barriers", slide51_code, Slide50::class.java, Slide52::class.java)
+class Slide51 : DefinitionSlide("Barriers", slide51_definition, Slide50::class.java, Slide52::class.java)
 
 
 val slide52_code = Gdx.files.internal("code/barrier-code.txt.out").readString()
 
 class Slide52 : CodeSlide("Barriers", slide52_code, Slide51::class.java, Slide53::class.java)
 
-class Slide53 : HeadlineSlide("Groups", Slide52::class.java, Slide54::class.java)
+class Slide53 : HeadlineSlide("Groups", Slide52::class.java, Slide53A::class.java)
+
+val slide53A_definition = "Control the visibility of a set of widgets."
+
+class Slide53A : DefinitionSlide("Groups", slide53A_definition, Slide53::class.java, Slide54::class.java)
 
 class Slide54 : BackgroundImageSlide(Gdx.files.internal("images/groups-example.png"), Scaling.fillY,
-        Slide53::class.java, Slide54A::class.java)
+        Slide53A::class.java, Slide54A::class.java)
 
 val slide54_code = Gdx.files.internal("code/groups-code.txt.out").readString()
 
@@ -1018,4 +1163,4 @@ class Slide60 : KtxScreen, Slide {
 
 class Slide61 : CodeSlide("Circular Positioning", Gdx.files.internal("code/circular-code.txt.out").readString(), Slide60::class.java, EndSlide::class.java)
 
-class EndSlide : HeadlineSlide("Any Questions?")
+class EndSlide : HeadlineSlide("Any Questions?", Slide61::class.java)

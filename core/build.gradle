@@ -10,9 +10,8 @@ dependencies {
     compile "io.github.libktx:ktx-async:$ktxAsyncVersion"
     compile "io.github.libktx:ktx-assets:$ktxAssetsVersion"
 
-    // VisUI builders
-    compile group: 'io.github.libktx', name: 'ktx-vis', version: '1.9.8-b1'
-    compile group: 'io.github.libktx', name: 'ktx-vis-style', version: '1.9.8-b1'
+    compile group: 'io.github.libktx', name: 'ktx-scene2d', version: '1.9.8-b1'
+    compile group: 'io.github.libktx', name: 'ktx-style', version: '1.9.8-b1'
 
     // on the fly font rendering
     compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"

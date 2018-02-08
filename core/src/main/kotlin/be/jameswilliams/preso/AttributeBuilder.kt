@@ -3,6 +3,13 @@ package be.jameswilliams.preso
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
+import ktx.scene2d.KTableWidget
+import ktx.scene2d.label
+import ktx.scene2d.table
+import ktx.scene2d.textField
+import ktx.style.label
+import ktx.style.skin
+import ktx.style.textField
 
 object Debugger {
     var x = 0f
@@ -50,7 +57,7 @@ object AttributeBuilder {
             ConstraintType.WRAP_CONTENT,
             ConstraintType.WRAP_CONTENT,
             ConstraintType.WRAP_CONTENT,
-            ConstraintType.CONSTRAINT)
+            ConstraintType.WRAP_CONTENT)
 
     var shapeRenderer: ShapeRenderer = ShapeRenderer()
 
@@ -112,10 +119,10 @@ object AttributeBuilder {
         // bottom
         when (constraints[3]) {
             ConstraintType.WRAP_CONTENT -> {
-                drawWrapContent(Vector2(340f, 90f), dimens = wrapContentDimens, offset = 60f, direction = Direction.BOTTOM)
+                drawWrapContent(Vector2(340f+location.x, 90f+location.y), dimens = wrapContentDimens, offset = 60f, direction = Direction.BOTTOM)
             }
             ConstraintType.EXACT_SIZE -> {
-                drawPipe(Vector2(340f, 50f), Vector2(150f, 75f), 5f, rotation = 90f)
+                drawPipe(Vector2(340f+location.x, 50f+location.y), Vector2(150f, 75f), 5f, rotation = 90f)
 
             }
             ConstraintType.CONSTRAINT -> {
@@ -305,6 +312,40 @@ object AttributeBuilder {
             rectLine(0f, radius, 2*radius, radius, lineWidth)
             identity()
             end()
+        }
+    }
+
+    fun drawConstraintTable(location:Vector2, widthLabel: String, heightLabel: String) : KTableWidget {
+        val mySkin = skin {
+            label {
+                font = (Presentation.theme as DefaultTheme).codeFont2
+                fontColor = Color.WHITE
+            }
+            textField {
+                font = (Presentation.theme as DefaultTheme).codeFont2
+                fontColor = Color.WHITE
+            }
+
+        }
+
+        return table {
+            isTransform = true
+            label("[CORAL]layout_width[]    ", skin = mySkin)
+            textField(skin=mySkin) {cell ->
+                text = widthLabel
+                cell.minSize(800f, 100f)
+                isDisabled = true
+
+            }.setScale(0.5f)
+            row()
+            label("[CORAL]layout_height[]   ", skin = mySkin)
+            textField(skin=mySkin) {cell ->
+                text = heightLabel
+                cell.minSize(800f, 100f)
+                isDisabled = true
+            }
+
+            setPosition(location.x,location.y)
         }
     }
 }

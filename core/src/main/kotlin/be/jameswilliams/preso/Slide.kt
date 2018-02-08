@@ -58,6 +58,7 @@ class DefaultTheme:Theme() {
     override lateinit var headerFont: BitmapFont
     override lateinit var bodyFont: BitmapFont
     override lateinit var codeFont: BitmapFont
+    lateinit var codeFont2:BitmapFont
 
     override lateinit var iconFont: BitmapFont
     override val backgroundColor:Color = Color().set(0.0f, 0.0f, 0.0f, 1.0f)
@@ -66,6 +67,7 @@ class DefaultTheme:Theme() {
         headerFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 96)
         bodyFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 64)
         codeFont = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), 64)
+        codeFont2 = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), 84)
 
         /* http://www.fontawesomecheatsheet.com/
          * Android          \uf17b
