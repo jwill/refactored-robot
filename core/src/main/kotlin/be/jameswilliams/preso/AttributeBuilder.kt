@@ -25,7 +25,7 @@ object ChainBuilder {
         val linkLength = 50f
         val heightOffset = height * 0.6f
         val halfHeightOffset = (height - heightOffset) / 2f
-        val widthOffset = linkLength * 0.9f
+        val widthOffset = linkLength * 0.85f
         var currentX = 0f
 
         with(shapeRenderer) {
@@ -33,10 +33,10 @@ object ChainBuilder {
             identity()
             translate(location.x, location.y, 0f)
             while(currentX < width) {
-                setColor(com.badlogic.gdx.graphics.Color.BLUE)
+                setColor(color)
                 ellipse(currentX,0f, linkLength,height)
-                setColor(com.badlogic.gdx.graphics.Color.BLACK)
-                ellipse(currentX+halfHeightOffset,halfHeightOffset, widthOffset,heightOffset)
+                setColor(color2)
+                ellipse(currentX+halfHeightOffset-5f,halfHeightOffset, widthOffset,heightOffset)
                 currentX += linkLength
             }
             identity()

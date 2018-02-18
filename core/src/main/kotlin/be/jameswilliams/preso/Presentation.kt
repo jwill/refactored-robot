@@ -14,8 +14,6 @@ import java.util.*
 import com.badlogic.gdx.InputMultiplexer
 
 
-
-
 object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
     lateinit var theme:Theme
     var i = 0
@@ -27,6 +25,7 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
     val multiplexer = InputMultiplexer()
 
     override fun create() {
+        println(Gdx.graphics.density)
 
         // This class is our core input processor but other objects might also subscribe to
         // input triggers as well
@@ -35,6 +34,7 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
 
         theme = DefaultTheme()
         startTime = Date().time
+
 
         addScreen(Slide0())
         addScreen(Slide1())
@@ -83,7 +83,6 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
 
         addScreen(Slide40())
         addScreen(Slide41())
-        addScreen(Slide42())
         addScreen(Slide43())
 
         addScreen(Slide45())
@@ -105,6 +104,7 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
 
         addScreen(Slide60())
         addScreen(Slide61())
+        addScreen(Slide62())
         addScreen(EndSlide())
 
         addScreen(Slide18A())
@@ -120,14 +120,14 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         addScreen(Slide54A())
         addScreen(Slide40A())
 
-        addScreen(Slide41A())
         addScreen(Slide47A())
         addScreen(Slide53A())
 
-        endTime = Date().time
-        println((endTime- startTime)/1000f)
+        setScreen<Slide0>()
+    }
 
-        setScreen<Slide49>()
+    override fun dispose() {
+        super.dispose()
     }
 
     override fun keyDown(keycode: Int): Boolean {
@@ -138,6 +138,8 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
             slide.backPressed()
         } else if (keycode == Input.Keys.SPACE) {
             saveScreenShot(i++)
+        } else if (keycode == Input.Keys.Q) {
+            System.exit(0)
         }
 
        return true

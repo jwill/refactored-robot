@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
@@ -23,6 +24,8 @@ import ktx.app.KtxScreen
 import ktx.app.clearScreen
 import ktx.app.use
 import ktx.collections.gdxArrayOf
+import ktx.scene2d.slider
+import ktx.scene2d.table
 
 // This is where slides live until they deserve
 // their own file
@@ -194,7 +197,7 @@ class Slide8 : BulletsSlide("MeasureSpec Modes", listOf("EXACTLY", "AT MOST", "U
 
 class Slide10 : HeadlineSlide("Double Taxation", Slide8::class.java, Slide10A::class.java)
 
-val slide10A_definition = "Android has to do multiple measure passes to\n" +
+val slide10A_definition = "Android has to do multiple measure passes to" +
         " determine the final positions of a View"
 
 class Slide10A : DefinitionSlide("What is double taxation?",
@@ -404,7 +407,7 @@ class Slide16 : BulletsSlide("ConstraintLayout",
 
 class Slide17 : HeadlineSlide("What are constraints?", Slide16::class.java, Slide18::class.java)
 
-val definition = "A restriction or limitation on the properties \nof a View that the layout attempts to respect"
+val definition = "A restriction or limitation on the properties of a View that the layout attempts to respect"
 
 class Slide18 : DefinitionSlide("What is a constraint?",
         definition, Slide17::class.java, Slide18A::class.java)
@@ -896,7 +899,7 @@ class Slide35 : ConstraintSlide(constraints, "wrap_content", "19dp",
     }
 }
 
-class Slide36 : ConstraintSlide(constraints, "wrap_content", "19p",
+class Slide36 : ConstraintSlide(constraints, "wrap_content", "19dp",
         Slide35::class.java, Slide37::class.java) {
     override fun render(delta: Float) {
         super.render(delta)
@@ -926,7 +929,7 @@ val slide37_constraints = arrayOf(
         AttributeBuilder.ConstraintType.EXACT_SIZE
 )
 
-class Slide37 : ConstraintSlide(slide37_constraints, "match_constraint", "19p",
+class Slide37 : ConstraintSlide(slide37_constraints, "match_constraint", "19dp ",
         Slide36::class.java, Slide38::class.java) {
     override fun render(delta: Float) {
         super.render(delta)
@@ -957,76 +960,36 @@ class Slide40 : HeadlineSlide("Chains", Slide38::class.java, Slide40A::class.jav
 class Slide40A : DefinitionSlide("Chains",
         "Views linked together with bidirectional positional constraints. Can replace LinearLayouts in many cases.", Slide40::class.java, Slide41::class.java)
 
-class Slide41 : BackgroundImageSlide(Gdx.files.internal("images/chain-blueprint.png"),
-        fit, Slide40A::class.java, Slide41A::class.java)
-
-class Slide41A : KtxScreen, Slide {
-    val shapeRenderer = ShapeRenderer()
-    val stage = Stage(ScreenViewport())
-
-
-    init {
-        Presentation.multiplexer.addProcessor(stage)
-        setSlideContent()
-        //table.debugAll()
-    }
-
-    override fun setSlideContent() {
-        //val slider = Slider(0f,100f, 1f, false, Skin())
-        //slider.setPosition(200f,200f)
-
-        //table.center()
-
-        //table.add(slider).minWidth(500f)
-/*        var table = ktx.vis.table {
-            isTransform = true
-            slider (vertical = true){
-                width = 600f
-                height = 300f
-                style.knob.minWidth = 50f
-                style.knobDown.minWidth = 50f
-                style.knobOver.minWidth = 50f
-
-                onChange {
-                    Gdx.app.log("UITest", "slider: " + this.getValue());
-                }
-
-            }.cell(grow = true)
-            setPosition(400f,400f)
-            height = 300f
-            width = 900f
-        }*/
-        //stage.addActor(table)
-
-
-        //stage.addActor(table)
-    }
-
+class Slide41 : ConstraintSlide(constraints, "wrap_content", "19dp",
+        Slide40A::class.java, Slide43::class.java) {
     override fun render(delta: Float) {
         super.render(delta)
-        val bg = Presentation.theme.backgroundColor
-        clearScreen(bg.r, bg.g, bg.b, bg.a)
+
+        with(shapeRenderer) {
+            begin(ShapeRenderer.ShapeType.Filled)
+            setColor(Color.PINK)
+            rect(300f, halfY, 150f, 80f)
+
+            rect(700f, halfY, 150f, 80f)
+            end()
+        }
 
 
-        //AttributeBuilder.drawAttributeView(Vector2(200f, 200f))
-        stage.act()
-        stage.draw()
-    }
+        ChainBuilder.makeChainLink(250f, 35f, Vector2(450f, halfY+30f),color2 = uiBackgroundColor)
 
-    override fun dispose() {
-        super.dispose()
-        stage.dispose()
-        shapeRenderer.dispose()
-        Presentation.multiplexer.removeProcessor(stage)
+        // Constraint Handles
+        //AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
+        //AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
 
+
+        AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY + 20f), Vector2(295f, 50f), color = Color.YELLOW)
+        AttributeBuilder.drawSquigglyPipe(Vector2(850f, halfY + 20f), Vector2(170f, 50f), color = Color.YELLOW)
     }
 }
 
-class Slide42 : BackgroundImageSlide(Gdx.files.internal("images/cycle-chain.png"),
-        fit, Slide41::class.java, Slide43::class.java)
 
 class Slide43 : BackgroundImageSlide(Gdx.files.internal("images/chain-types.png"),
-        fit, Slide42::class.java, Slide45::class.java)
+        fit, Slide41::class.java, Slide45::class.java)
 
 
 class Slide45 : HeadlineSlide("Virtual Helper Objects", Slide43::class.java, Slide46::class.java)
@@ -1161,6 +1124,8 @@ class Slide60 : KtxScreen, Slide {
 
 }
 
-class Slide61 : CodeSlide("Circular Positioning", Gdx.files.internal("code/circular-code.txt.out").readString(), Slide60::class.java, EndSlide::class.java)
+class Slide61 : CodeSlide("Circular Positioning", Gdx.files.internal("code/circular-code.txt.out").readString(), Slide60::class.java, Slide62::class.java)
 
-class EndSlide : HeadlineSlide("Any Questions?", Slide61::class.java)
+class Slide62 : HeadlineSlide("Udacity is hiring!",Slide61::class.java, EndSlide::class.java)
+
+class EndSlide : HeadlineSlide("Any Questions?", Slide62::class.java)
