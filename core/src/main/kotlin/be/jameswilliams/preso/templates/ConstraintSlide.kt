@@ -28,8 +28,8 @@ open class ConstraintSlide(val constraints:Array<AttributeBuilder.ConstraintType
                       val next:Class<out KtxScreen>? = null) : KtxScreen, Slide {
     val shapeRenderer = ShapeRenderer()
     val stage = Stage(ScreenViewport())
-    val attributeOffset = Gdx.graphics.width * 0.6f
-    val constraintOffset = Gdx.graphics.width * 0.7f
+    val attributeOffset = Gdx.graphics.width * 0.55f
+    val constraintOffset = Gdx.graphics.width * 0.8f
     val uiSizeX = Gdx.graphics.width * 0.4f
     val uiSizeY = Gdx.graphics.width * 0.6f
     val uiBackgroundColor = Color.valueOf("#3577e0")
@@ -54,7 +54,8 @@ open class ConstraintSlide(val constraints:Array<AttributeBuilder.ConstraintType
     }
 
     override fun setSlideContent() {
-        val constraintTable = AttributeBuilder.drawConstraintTable(Vector2(constraintOffset, 400f), widthLabel = widthLabel, heightLabel = heightLabel)
+        val constraintTable = AttributeBuilder.drawConstraintTable(
+                Vector2(constraintOffset, uiSizeY*0.2f), widthLabel = widthLabel, heightLabel = heightLabel)
 
         stage + constraintTable
     }
@@ -66,7 +67,7 @@ open class ConstraintSlide(val constraints:Array<AttributeBuilder.ConstraintType
         clearScreen(1f, 1f, 1f, bg.a)
 
 
-        AttributeBuilder.drawAttributeView(Vector2(attributeOffset, 700f),constraints)
+        AttributeBuilder.drawAttributeView(Vector2(attributeOffset, uiSizeY*0.35f),constraints)
 
 
         // draw UI

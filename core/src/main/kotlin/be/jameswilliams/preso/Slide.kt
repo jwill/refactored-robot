@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import be.jameswilliams.preso.TypographicalScale.*
 
 
 interface Slide {
@@ -37,11 +38,11 @@ abstract class Theme:Skin() {
     abstract val backgroundColor: Color
 
     companion object {
-        fun createStyle(filepath: FileHandle, size:Int, characters:String? = null) : BitmapFont {
+        fun createStyle(filepath: FileHandle, scale: TypographicalScale, characters:String? = null, distanceFactor:Int = 1) : BitmapFont {
             var font:BitmapFont
             val generator = FreeTypeFontGenerator(filepath)
             val parameter = FreeTypeFontGenerator.FreeTypeFontParameter()
-            parameter.size = size
+            parameter.size = (scale.sp * Gdx.graphics.getDensity() * distanceFactor).toInt()
             if (characters != null) {
                 parameter.characters = characters
             }
@@ -78,10 +79,15 @@ open class DefaultTheme:Theme() {
     override val backgroundColor:Color = Color().set(0.0f, 0.0f, 0.0f, 1.0f)
 
     init {
-        headerFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 96)
-        bodyFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 64)
-        codeFont = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), 64)
-        codeFont2 = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), 84)
+        headerFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), DISPLAY4)
+        bodyFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), DISPLAY3)
+        codeFont = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), DISPLAY3)
+        codeFont2 = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), DISPLAY3HALF)
+
+        //headerFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 96)
+        //bodyFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), 64)
+        //codeFont = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), 64)
+        //codeFont2 = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), 84)
 
         /* http://www.fontawesomecheatsheet.com/
          * Android          \uf17b
@@ -91,7 +97,7 @@ open class DefaultTheme:Theme() {
          * twitter          \uf099
          * circle (bullet)  \uf111
          */
-        iconFont = createStyle(Gdx.files.internal("fonts/fontawesome-webfont.ttf"), 128, "\uf17b\uf09b\uf09e\uf03e\uf099\uf111")
+        iconFont = createStyle(Gdx.files.internal("fonts/fontawesome-webfont.ttf"), DISPLAY4, "\uf17b\uf09b\uf09e\uf03e\uf099\uf111")
     }
 }
 object IconFontConstants {

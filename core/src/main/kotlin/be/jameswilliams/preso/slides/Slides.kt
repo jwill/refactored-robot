@@ -858,20 +858,30 @@ class Slide34 : ConstraintSlide(AttributeBuilder.defaultConstraints, "wrap_conte
     override fun render(delta: Float) {
         super.render(delta)
 
+        val rectX = uiSizeX * 0.4f
+        val rectWidth = uiSizeX * 0.2f
+        val rectHeight = uiSizeY * 0.05f
+        val handleOffset = uiSizeX * 0.02f
+
         with(shapeRenderer) {
             begin(ShapeRenderer.ShapeType.Filled)
             setColor(Color.PINK)
-            rect(400f, halfY, 200f, 80f)
+            // 400, 200
+            rect(rectX, halfY, rectWidth, rectHeight)
             end()
         }
-        // AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY + 20f),Vector2(250f, 50f), color=Color.YELLOW)
-        // AttributeBuilder.drawSquigglyPipe(Vector2(505f, halfY + 20f),Vector2(250f, 50f), color=Color.YELLOW)
         // Constraint Handles
-        AttributeBuilder.drawConstraintHandle(Vector2(380f, halfY + 20f), radius = 20f, color2 = Color.BLUE)
-        AttributeBuilder.drawConstraintHandle(Vector2(580f, halfY + 20f), radius = 20f, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(
+                Vector2(rectX - handleOffset, halfY+handleOffset), radius = handleOffset, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(
+                Vector2(rectX+rectWidth-handleOffset, halfY + handleOffset), radius = handleOffset, color2 = Color.BLUE)
 
-        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
-        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(
+                Vector2((rectX+rectWidth)*0.8f, halfY + 3*handleOffset), radius = handleOffset, color2 = Color.BLUE)
+
+        AttributeBuilder.drawConstraintHandle(
+                Vector2((rectX+rectWidth)*0.8f, halfY - handleOffset), radius = handleOffset, color2 = Color.BLUE)
+
     }
 }
 
@@ -886,20 +896,34 @@ class Slide35 : ConstraintSlide(constraints, "wrap_content", "19dp",
     override fun render(delta: Float) {
         super.render(delta)
 
+        val rectX = uiSizeX * 0.4f
+        val rectWidth = uiSizeX * 0.2f
+        val rectHeight = uiSizeY * 0.05f
+        val handleOffset = uiSizeX * 0.02f
+
         with(shapeRenderer) {
             begin(ShapeRenderer.ShapeType.Filled)
             setColor(Color.PINK)
-            rect(400f, halfY, 200f, 80f)
+            rect(rectX, halfY, rectWidth, rectHeight)
             end()
         }
-        // AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY + 20f),Vector2(250f, 50f), color=Color.YELLOW)
-        // AttributeBuilder.drawSquigglyPipe(Vector2(505f, halfY + 20f),Vector2(250f, 50f), color=Color.YELLOW)
         // Constraint Handles
-        AttributeBuilder.drawConstraintHandle(Vector2(380f, halfY + 20f), radius = 20f, color2 = Color.BLUE)
-        AttributeBuilder.drawConstraintHandle(Vector2(580f, halfY + 20f), radius = 20f, color2 = Color.BLUE)
+//        AttributeBuilder.drawConstraintHandle(Vector2(380f, halfY + 20f), radius = 20f, color2 = Color.BLUE)
+//        AttributeBuilder.drawConstraintHandle(Vector2(580f, halfY + 20f), radius = 20f, color2 = Color.BLUE)
+//
+//        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
+//        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
 
-        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
-        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(
+                Vector2(rectX - handleOffset, halfY+handleOffset), radius = handleOffset, color2 = Color.BLUE)
+        AttributeBuilder.drawConstraintHandle(
+                Vector2(rectX+rectWidth-handleOffset, halfY + handleOffset), radius = handleOffset, color2 = Color.BLUE)
+
+        AttributeBuilder.drawConstraintHandle(
+                Vector2((rectX+rectWidth)*0.8f, halfY + 3*handleOffset), radius = handleOffset, color2 = Color.BLUE)
+
+        AttributeBuilder.drawConstraintHandle(
+                Vector2((rectX+rectWidth)*0.8f, halfY - handleOffset), radius = handleOffset, color2 = Color.BLUE)
     }
 }
 
@@ -908,21 +932,36 @@ class Slide36 : ConstraintSlide(constraints, "wrap_content", "19dp",
     override fun render(delta: Float) {
         super.render(delta)
 
+        val rectX = uiSizeX * 0.4f
+        val rectWidth = uiSizeX * 0.2f
+        val rectHeight = uiSizeY * 0.05f
+        val handleOffset = uiSizeX * 0.02f
+
         with(shapeRenderer) {
             begin(ShapeRenderer.ShapeType.Filled)
             setColor(Color.PINK)
-            rect(400f, halfY, 200f, 80f)
+            rect(rectX, halfY, rectWidth, rectHeight)
             end()
         }
 
 
         // Constraint Handles
-        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
-        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
+        // middle top
+        AttributeBuilder.drawConstraintHandle(
+                Vector2((rectX+rectWidth)*0.8f, halfY + 3*handleOffset), radius = handleOffset, color2 = Color.BLUE)
+        // middle bottom
+        AttributeBuilder.drawConstraintHandle(
+                Vector2((rectX+rectWidth)*0.8f, halfY - handleOffset), radius = handleOffset, color2 = Color.BLUE)
 
+        // left
+        AttributeBuilder.drawSquigglyPipe(
+                Vector2(5f, halfY + handleOffset),
+                Vector2(rectX - 5f, 2 * handleOffset), color = Color.YELLOW)
 
-        AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY + 20f), Vector2(395f, 50f), color = Color.YELLOW)
-        AttributeBuilder.drawSquigglyPipe(Vector2(600f, halfY + 20f), Vector2(420f, 50f), color = Color.YELLOW)
+        //right
+        AttributeBuilder.drawSquigglyPipe(
+                Vector2(rectX + rectWidth, halfY + handleOffset),
+                Vector2(rectX, 2 * handleOffset), color = Color.YELLOW)
     }
 }
 
@@ -938,20 +977,34 @@ class Slide37 : ConstraintSlide(slide37_constraints, "match_constraint", "19dp "
     override fun render(delta: Float) {
         super.render(delta)
 
+        val rectX = uiSizeX *0.06f
+        val rectWidth = uiSizeX * 0.87f
+        val rectHeight = uiSizeY * 0.05f
+        val handleOffset = uiSizeX * 0.02f
+        val squigglyWidth = uiSizeX * 0.05f
+
+
         with(shapeRenderer) {
             begin(ShapeRenderer.ShapeType.Filled)
             setColor(Color.PINK)
-            rect(65f, halfY, 900f, 80f)
+            rect(rectX, halfY, rectWidth, rectHeight)
             end()
         }
 
         // Constraint Handles
-        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
-        AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
+        // middle top
+        AttributeBuilder.drawConstraintHandle(
+                Vector2((rectX+rectWidth)*0.5f, halfY + 3*handleOffset), radius = handleOffset, color2 = Color.BLUE)
+        // middle bottom
+        AttributeBuilder.drawConstraintHandle(
+                Vector2((rectX+rectWidth)*0.5f, halfY - handleOffset), radius = handleOffset, color2 = Color.BLUE)
 
-
-        AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY + 20f), Vector2(60f, 50f), color = Color.YELLOW)
-        AttributeBuilder.drawSquigglyPipe(Vector2(965f, halfY + 20f), Vector2(55f, 50f), color = Color.YELLOW)
+        // left
+        AttributeBuilder.drawSquigglyPipe(
+                Vector2(5f, halfY + handleOffset), Vector2(squigglyWidth, 2 * handleOffset), color = Color.YELLOW)
+        // right
+        AttributeBuilder.drawSquigglyPipe(
+                Vector2((rectX+ rectWidth), halfY + handleOffset), Vector2(squigglyWidth*1.35f, 2 * handleOffset), color = Color.YELLOW)
     }
 }
 
