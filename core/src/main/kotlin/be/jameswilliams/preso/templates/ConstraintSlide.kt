@@ -62,7 +62,9 @@ open class ConstraintSlide(val constraints:Array<AttributeBuilder.ConstraintType
     override fun render(delta: Float) {
         super.render(delta)
         val bg = Presentation.theme.backgroundColor
-        clearScreen(bg.r, bg.g, bg.b, bg.a)
+        //clearScreen(bg.r, bg.g, bg.b, bg.a)
+        clearScreen(1f, 1f, 1f, bg.a)
+
 
         AttributeBuilder.drawAttributeView(Vector2(attributeOffset, 700f),constraints)
 

@@ -50,6 +50,8 @@ class Slide0() : KtxScreen, Slide {
         val twitterId = bodyLabel("@ecspike")
         val twitterIcon = iconLabel("\uf099")
 
+        println(Presentation.theme.blueHeader.toString())
+
         twitterIcon.setFontScale(0.5f)
         title.centerLabel()
         name.centerLabel()
@@ -511,12 +513,14 @@ class Slide22A() : KtxScreen, Slide {
         }
     }
 
+    val purpleHex = Presentation.theme.purpleDetail.toHex()
+
     var stage: Stage
     var renderer = ShapeRenderer()
     val label = headerLabel("[BLUE]A[]")
-    val labelTop = bodyLabel("[YELLOW]top[]")
-    val labelBottom = bodyLabel("[YELLOW]bottom[]")
-    val labelBaseline = bodyLabel("[YELLOW]baseline[]")
+    val labelTop = bodyLabel("[${purpleHex}]top[]")
+    val labelBottom = bodyLabel("[${purpleHex}]bottom[]")
+    val labelBaseline = bodyLabel("[${purpleHex}]baseline[]")
     var showTopRectangle = false
     var showBottomRectangle = false
     var showBaselineRectangle = false
@@ -668,14 +672,14 @@ class Slide22B() : KtxScreen, Slide {
             Presentation.setScreen(Slide22C::class.java)
         }
     }
-
+    val purpleHex = Presentation.theme.purpleDetail.toHex()
     var stage: Stage
     var renderer = ShapeRenderer()
     val label = headerLabel("[BLUE]A[]")
-    val labelLeft = bodyLabel("[YELLOW]left[]")
-    val labelStart = bodyLabel("[YELLOW]start[]")
-    val labelRight = bodyLabel("[YELLOW]right[]")
-    val labelEnd = bodyLabel("[YELLOW]end[]")
+    val labelLeft = bodyLabel("[${purpleHex}]left[]")
+    val labelStart = bodyLabel("[${purpleHex}]start[]")
+    val labelRight = bodyLabel("[${purpleHex}]right[]")
+    val labelEnd = bodyLabel("[${purpleHex}]end[]")
     var showLeftRectangle = false
     var showRightRectangle = false
 

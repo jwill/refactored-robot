@@ -12,7 +12,7 @@ fun headerLabel(text:String, isTypingLabel: Boolean = false) :Label {
     if (isTypingLabel)
         return TypingLabel(text, Label.LabelStyle(Presentation.theme.headerFont, WHITE))
     else
-        return Label(text, Label.LabelStyle(Presentation.theme.headerFont, WHITE))
+        return Label(text, Label.LabelStyle(Presentation.theme.headerFont, Presentation.theme.blueHeader))
 }
 fun codeLabel(text:String) =  Label(text, Label.LabelStyle(Presentation.theme.codeFont, WHITE))
 fun bodyLabel(text:String) =  Label(text, Label.LabelStyle(Presentation.theme.bodyFont, WHITE))

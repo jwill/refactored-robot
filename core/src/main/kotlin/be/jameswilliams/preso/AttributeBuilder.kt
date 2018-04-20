@@ -53,6 +53,7 @@ AttributeBuilder.drawAttributeView(Vector2(200f, 200f))
 
 
 object AttributeBuilder {
+    val theme = ScreencastTheme()
     var defaultConstraints = arrayOf<ConstraintType>(
             ConstraintType.WRAP_CONTENT,
             ConstraintType.WRAP_CONTENT,
@@ -77,7 +78,7 @@ object AttributeBuilder {
         val wrapContentDimens = Vector2(80f, 40f)
 
         val sideLength = 600f
-        drawOuterBox(Vector2(0f+location.x, 0f+location.y), sideLength, 10f)
+        drawOuterBox(Vector2(0f+location.x, 0f+location.y), sideLength, 10f, color = theme.purpleDetail)
         // draw left component
 
         when (constraints[0]) {
@@ -131,7 +132,7 @@ object AttributeBuilder {
         }
     }
 
-    fun drawWrapContent(location: Vector2, dimens: Vector2, offset: Float, direction: Direction = Direction.TOP, color: Color = Color.WHITE) {
+    fun drawWrapContent(location: Vector2, dimens: Vector2, offset: Float, direction: Direction = Direction.TOP, color: Color = theme.purpleDetail) {
         var location2 = Vector2()
         var location3 = Vector2()
         var rotationAngle = 0f
@@ -185,7 +186,7 @@ object AttributeBuilder {
     }
 
     fun drawSquigglyPipe(location: Vector2, dimens: Vector2, lineWidth: Float = 5f,
-                         rotation: Float = 0f, color: Color = Color.WHITE) {
+                         rotation: Float = 0f, color: Color = theme.purpleDetail) {
         val tenPercentX = dimens.x / 10f
         val halfY = dimens.y / 2f
         val quarterPercentY = dimens.y / 4f
@@ -225,7 +226,7 @@ object AttributeBuilder {
         }
     }
 
-    fun drawPipe(location: Vector2, dimens: Vector2, lineWidth: Float = 5f, rotation:Float = 0f, color: Color = Color.WHITE) {
+    fun drawPipe(location: Vector2, dimens: Vector2, lineWidth: Float = 5f, rotation:Float = 0f, color: Color = theme.purpleDetail) {
         val halfY = dimens.y / 2f
         with(shapeRenderer) {
             begin(ShapeRenderer.ShapeType.Filled)
@@ -323,14 +324,14 @@ object AttributeBuilder {
             }
             textField {
                 font = (Presentation.theme as DefaultTheme).codeFont2
-                fontColor = Color.WHITE
+                fontColor = Presentation.theme.pinkHighlight
             }
 
         }
 
         return table {
             isTransform = true
-            label("[CORAL]layout_width[]    ", skin = mySkin)
+            label("[${Presentation.theme.ltGrayDetail.toHex()}]layout_width[]    ", skin = mySkin)
             textField(skin=mySkin) {cell ->
                 text = widthLabel
                 cell.minSize(800f, 100f)
@@ -338,7 +339,7 @@ object AttributeBuilder {
 
             }.setScale(0.5f)
             row()
-            label("[CORAL]layout_height[]   ", skin = mySkin)
+            label("[${Presentation.theme.ltGrayDetail.toHex()}]layout_height[]   ", skin = mySkin)
             textField(skin=mySkin) {cell ->
                 text = heightLabel
                 cell.minSize(800f, 100f)

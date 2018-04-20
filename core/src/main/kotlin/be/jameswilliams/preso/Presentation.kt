@@ -15,7 +15,7 @@ import com.badlogic.gdx.InputMultiplexer
 
 
 object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
-    lateinit var theme:Theme
+    lateinit var theme:ScreencastTheme
     var i = 0
     var startTime:Long = 0
     var endTime:Long = 0
@@ -32,7 +32,7 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         multiplexer.addProcessor(this)
         Gdx.input.inputProcessor = multiplexer
 
-        theme = DefaultTheme()
+        theme = ScreencastTheme()
         startTime = Date().time
 
 
@@ -123,7 +123,7 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         addScreen(Slide47A())
         addScreen(Slide53A())
 
-        setScreen<Slide0>()
+        setScreen<Slide34>()
     }
 
     override fun dispose() {

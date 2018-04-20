@@ -3,6 +3,7 @@ package be.jameswilliams.preso.templates
 import be.jameswilliams.preso.Bullets
 import be.jameswilliams.preso.Presentation
 import be.jameswilliams.preso.Slide
+import be.jameswilliams.preso.headerLabel
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -45,7 +46,7 @@ open class BulletsSlide(val title:String, val bulletItems:List<String>, debug:Bo
 
 
     override fun setSlideContent() {
-        val titleLabel = Label(title, Label.LabelStyle(Presentation.theme.headerFont, Color.WHITE))
+        val titleLabel = headerLabel(title)
         table.add(titleLabel).expandX().padTop(16f)
 
         TypingConfig.FORCE_COLOR_MARKUP_BY_DEFAULT = true

@@ -54,11 +54,25 @@ abstract class Theme:Skin() {
     }
 }
 
-class DefaultTheme:Theme() {
+fun Color.toHex() : String {
+    return "#"+this.toString()
+}
+
+class ScreencastTheme:DefaultTheme() {
+    val blueHeader = Color.valueOf("#2C6481")
+    val pinkHighlight = Color.valueOf("#F06292")
+    val ltGrayDetail = Color.valueOf("#90A4AE")
+    val purpleDetail = Color.valueOf("#7986CB")
+
+    override val backgroundColor:Color = ltGrayDetail
+
+}
+
+open class DefaultTheme:Theme() {
     override lateinit var headerFont: BitmapFont
     override lateinit var bodyFont: BitmapFont
     override lateinit var codeFont: BitmapFont
-    lateinit var codeFont2:BitmapFont
+    var codeFont2:BitmapFont
 
     override lateinit var iconFont: BitmapFont
     override val backgroundColor:Color = Color().set(0.0f, 0.0f, 0.0f, 1.0f)
