@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Animation
+import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Interpolation
@@ -20,6 +21,7 @@ import com.badlogic.gdx.utils.Scaling.fit
 import com.badlogic.gdx.utils.Scaling.stretchY
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.rafaskoberg.gdx.typinglabel.TypingConfig
+import ktx.actors.plus
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
 import ktx.app.use
@@ -1031,30 +1033,32 @@ class Slide41 : ConstraintSlide(constraints, "wrap_content", "19dp",
         val rectWidth = uiSizeX * 0.2f
         val rectHeight = uiSizeY * 0.05f
         val handleOffset = uiSizeX * 0.02f
-        val squigglyWidth = uiSizeX * 0.05f
+        val squigglyWidth = 100f
 
-        //val rectWidth = 150f
-        //val rectHeight = 80f
+        val rightRectX = uiSizeX - squigglyWidth - rectWidth
 
         with(shapeRenderer) {
             begin(ShapeRenderer.ShapeType.Filled)
             setColor(Color.PINK)
             rect(rectX, halfY, rectWidth, rectHeight)
 
-            rect(rectX+rectWidth+230f+20f, halfY, rectWidth, rectHeight)
+
+            rect(rightRectX, halfY, rectWidth, rectHeight)
             end()
         }
 
 
-        ChainBuilder.makeChainLink(230f, 35f, Vector2(rectX+rectWidth, halfY+10f),color2 = uiBackgroundColor)
+        val linkLength = rightRectX - rectWidth-rectX
+        ChainBuilder.makeChainLink(linkLength - 30f, 35f, Vector2(rectX+rectWidth, halfY+20f),color2 = uiBackgroundColor)
 
         // Constraint Handles
         //AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
         //AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
 
+        val rightSquigglyX = uiSizeX - 100f - 2f
 
-        AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY ), Vector2(100f, 4 * handleOffset), color = Color.YELLOW)
-        AttributeBuilder.drawSquigglyPipe(Vector2(665f, halfY), Vector2(100f, 4 * handleOffset), color = Color.YELLOW)
+        AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY ), Vector2(squigglyWidth, 4 * handleOffset), color = Color.YELLOW)
+        AttributeBuilder.drawSquigglyPipe(Vector2(rightSquigglyX, halfY), Vector2(squigglyWidth, 4 * handleOffset), color = Color.YELLOW)
     }
 }
 
@@ -1202,12 +1206,66 @@ class Slide62 : HeadlineSlide("Udacity is hiring!",Slide61::class.java, EndSlide
 class EndSlide : HeadlineSlide("Any Questions?", Slide62::class.java)
 
 class SlideTest : KtxScreen, Slide {
+    /**
+     * Create Sprite and assign Texture to it, Then use Sprite setColor to adjust its alpha, like so,
+
+    Texture yourTexture = new Texture("image.png");
+    sprite = new Sprite(yourTexture);
+    //RGBA
+    sprite.setColor(1, 0, 0, 0.2f);
+    and in render() loop use SpriteBatch
+
+    sprite.draw(spriteBatch);
+     */
+
+
+    val batch = SpriteBatch()
+    val ruler = Texture(Gdx.files.internal("images/ruler.png"))
+    val layout = Texture(Gdx.files.internal("images/layout-graphic.png"))
+    val ls = Sprite(layout)
+
+    var stage: Stage
+
+
+    init {
+        stage = Stage(ScreenViewport())
+        setSlideContent()
+
+    }
+
     override fun setSlideContent() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val titleLabel = headerLabel("Android Rendering Cycle")
+
+
+        titleLabel.centerX()
+        titleLabel.y = Gdx.graphics.height - titleLabel.height -16f
+        stage + titleLabel
     }
 
     override fun render(delta: Float) {
         val bg = Presentation.theme.backgroundColor
-        clearScreen(bg.r, bg.g, bg.b, bg.a)
+        clearScreen(1f,1f,1f, 1f)
+        //clearScreen(bg.r, bg.g, bg.b, bg.a)
+        ls.setColor(1f,1f,1f,0.5f)
+
+        ls.setPosition(1000f, 500f)
+        with(batch) {
+            begin()
+            draw(ruler, 500f, 500f)
+            ls.draw(batch)
+            //draw(layout, 1000f, 500f)
+            end()
+        }
+
+
+
+        stage.act()
+        stage.draw()
+    }
+
+    override fun dispose() {
+        super.dispose()
+        batch.dispose()
+        stage.dispose()
     }
 }

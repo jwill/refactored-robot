@@ -38,7 +38,7 @@ abstract class Theme:Skin() {
     abstract val backgroundColor: Color
 
     companion object {
-        fun createStyle(filepath: FileHandle, scale: TypographicalScale, characters:String? = null, distanceFactor:Int = 1) : BitmapFont {
+        fun createStyle(filepath: FileHandle, scale: TypographicalScale, characters:String? = null, distanceFactor:Float = 0.5f) : BitmapFont {
             var font:BitmapFont
             val generator = FreeTypeFontGenerator(filepath)
             val parameter = FreeTypeFontGenerator.FreeTypeFontParameter()

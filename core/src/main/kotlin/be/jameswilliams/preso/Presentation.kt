@@ -125,7 +125,7 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
 
         addScreen(SlideTest())
 
-        setScreen<Slide41>()
+        setScreen<SlideTest>()
     }
 
     override fun dispose() {
@@ -147,7 +147,7 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
     fun saveScreenShot(index:Int) {
         val pixels = ScreenUtils.getFrameBufferPixels(0, 0, Gdx.graphics.backBufferWidth, Gdx.graphics.backBufferHeight, true)
 
-        val pixmap = Pixmap(Gdx.graphics.backBufferWidth, Gdx.graphics.backBufferHeight, Pixmap.Format.RGB8888)
+        val pixmap = Pixmap(Gdx.graphics.backBufferWidth, Gdx.graphics.backBufferHeight, Pixmap.Format.RGB888)
         BufferUtils.copy(pixels, 0, pixmap.pixels, pixels.size)
         PixmapIO.writePNG(Gdx.files.external("Downloads/screens/output$index.png"), pixmap)
         pixmap.dispose()
