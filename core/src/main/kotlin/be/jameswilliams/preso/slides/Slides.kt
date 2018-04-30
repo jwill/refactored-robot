@@ -218,8 +218,8 @@ class Slide13A : KtxScreen, Slide {
     var stage: Stage
     val texture = Texture(Gdx.files.internal("images/device.png"))
 
-    val startingWidth = 300f
-    val endingWidth = 580f
+    val startingWidth = 150f
+    val endingWidth = 400f
     var currentWidth = startingWidth
     val boxHeight = 150f
 
@@ -240,6 +240,8 @@ class Slide13A : KtxScreen, Slide {
         val bg = Presentation.theme.backgroundColor
         clearScreen(bg.r, bg.g, bg.b, bg.a)
 
+        val xTranslate = windowWidth / 2f - 200
+
         batch.use {
             it.draw(texture, 0f, 0f, Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
         }
@@ -249,11 +251,13 @@ class Slide13A : KtxScreen, Slide {
             currentWidth = startingWidth
         }
 
+
+
         with(renderer) {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(Color.LIGHT_GRAY)
-            translate(windowWidth / 2f - 300, windowHeight / 2f, 0f)
+            translate(xTranslate, windowHeight / 2f, 0f)
             rect(0f, 0f, currentWidth, boxHeight)
             end()
         }
@@ -262,7 +266,7 @@ class Slide13A : KtxScreen, Slide {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(Color.LIGHT_GRAY)
-            translate(windowWidth / 2f - 300, windowHeight / 2f - boxHeight - 16f, 0f)
+            translate(xTranslate, windowHeight / 2f - boxHeight - 16f, 0f)
             rect(0f, 0f, currentWidth, boxHeight)
             end()
         }
@@ -271,7 +275,7 @@ class Slide13A : KtxScreen, Slide {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(Color.RED)
-            translate(windowWidth / 2f - 300, windowHeight / 2f - boxHeight * 2 - 16f * 2, 0f)
+            translate(xTranslate, windowHeight / 2f - boxHeight * 2 - 16f * 2, 0f)
             rect(0f, 0f, endingWidth, boxHeight)
             end()
         }
@@ -303,13 +307,14 @@ class Slide13B : KtxScreen, Slide {
     val texture = Texture(Gdx.files.internal("images/device.png"))
 
     val staticWidth = 100f
-    val startingWidth = 100f
-    val endingWidth = 350f
+    val startingWidth = 50f
+    val endingWidth = 200f
     var currentWidth = startingWidth
     val boxHeight = 150f
 
     val windowWidth = Gdx.graphics.width
     val windowHeight = Gdx.graphics.height
+    val xTranslate = windowWidth / 2f - 225
 
     init {
         stage = Stage(ScreenViewport())
@@ -329,7 +334,7 @@ class Slide13B : KtxScreen, Slide {
             it.draw(texture, 0f, 0f, Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
         }
 
-        currentWidth += (delta * 100f)
+        currentWidth += (delta * 50f)
         if (currentWidth >= endingWidth) {
             currentWidth = startingWidth
         }
@@ -338,7 +343,7 @@ class Slide13B : KtxScreen, Slide {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(Color.LIGHT_GRAY)
-            translate(windowWidth / 2f - 300, windowHeight / 2f, 0f)
+            translate(xTranslate, windowHeight / 2f, 0f)
             rect(0f, 0f, staticWidth, boxHeight)
             end()
         }
@@ -347,7 +352,7 @@ class Slide13B : KtxScreen, Slide {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(1f, 0f, 0f, 1f)
-            translate(windowWidth / 2f - 300 + 16 + staticWidth, windowHeight / 2f, 0f)
+            translate(xTranslate + 16 + staticWidth, windowHeight / 2f, 0f)
             rect(0f, 0f, currentWidth, boxHeight)
             end()
         }
@@ -356,7 +361,7 @@ class Slide13B : KtxScreen, Slide {
             begin(ShapeRenderer.ShapeType.Filled)
             identity()
             setColor(Color.LIGHT_GRAY)
-            translate(windowWidth / 2f - 300 + 16 + staticWidth + currentWidth + 16, windowHeight / 2f, 0f)
+            translate(xTranslate + 16 + staticWidth + currentWidth + 16, windowHeight / 2f, 0f)
             rect(0f, 0f, staticWidth, boxHeight)
             end()
         }
@@ -561,9 +566,9 @@ class Slide22A() : KtxScreen, Slide {
         labelBaseline.x = halfWindowWidth + labelBaseline.width + 250f
         labelBaseline.y = halfWindowHeight - labelBaseline.height / 2 + 81f
 
-        labelBottom.setFontScale(0.9f)
-        labelTop.setFontScale(0.9f)
-        labelBaseline.setFontScale(0.9f)
+        //labelBottom.setFontScale(0.9f)
+        //labelTop.setFontScale(0.9f)
+        //labelBaseline.setFontScale(0.9f)
 
         labelBaseline.isVisible = false
         labelBottom.isVisible = false
@@ -1022,25 +1027,34 @@ class Slide41 : ConstraintSlide(constraints, "wrap_content", "19dp",
     override fun render(delta: Float) {
         super.render(delta)
 
+        val rectX = 105f
+        val rectWidth = uiSizeX * 0.2f
+        val rectHeight = uiSizeY * 0.05f
+        val handleOffset = uiSizeX * 0.02f
+        val squigglyWidth = uiSizeX * 0.05f
+
+        //val rectWidth = 150f
+        //val rectHeight = 80f
+
         with(shapeRenderer) {
             begin(ShapeRenderer.ShapeType.Filled)
             setColor(Color.PINK)
-            rect(300f, halfY, 150f, 80f)
+            rect(rectX, halfY, rectWidth, rectHeight)
 
-            rect(700f, halfY, 150f, 80f)
+            rect(rectX+rectWidth+230f+20f, halfY, rectWidth, rectHeight)
             end()
         }
 
 
-        ChainBuilder.makeChainLink(250f, 35f, Vector2(450f, halfY+30f),color2 = uiBackgroundColor)
+        ChainBuilder.makeChainLink(230f, 35f, Vector2(rectX+rectWidth, halfY+10f),color2 = uiBackgroundColor)
 
         // Constraint Handles
         //AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY + 60f), radius = 20f, color2 = Color.BLUE)
         //AttributeBuilder.drawConstraintHandle(Vector2(480f, halfY - 20f), radius = 20f, color2 = Color.BLUE)
 
 
-        AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY + 20f), Vector2(295f, 50f), color = Color.YELLOW)
-        AttributeBuilder.drawSquigglyPipe(Vector2(850f, halfY + 20f), Vector2(170f, 50f), color = Color.YELLOW)
+        AttributeBuilder.drawSquigglyPipe(Vector2(5f, halfY ), Vector2(100f, 4 * handleOffset), color = Color.YELLOW)
+        AttributeBuilder.drawSquigglyPipe(Vector2(665f, halfY), Vector2(100f, 4 * handleOffset), color = Color.YELLOW)
     }
 }
 
@@ -1186,3 +1200,14 @@ class Slide61 : CodeSlide("Circular Positioning", Gdx.files.internal("code/circu
 class Slide62 : HeadlineSlide("Udacity is hiring!",Slide61::class.java, EndSlide::class.java)
 
 class EndSlide : HeadlineSlide("Any Questions?", Slide62::class.java)
+
+class SlideTest : KtxScreen, Slide {
+    override fun setSlideContent() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun render(delta: Float) {
+        val bg = Presentation.theme.backgroundColor
+        clearScreen(bg.r, bg.g, bg.b, bg.a)
+    }
+}

@@ -123,7 +123,9 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         addScreen(Slide47A())
         addScreen(Slide53A())
 
-        setScreen<Slide34>()
+        addScreen(SlideTest())
+
+        setScreen<Slide41>()
     }
 
     override fun dispose() {
@@ -132,14 +134,11 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
 
     override fun keyDown(keycode: Int): Boolean {
         var slide = currentScreen as Slide
-        if (keycode == Input.Keys.RIGHT || keycode == 93) {
-            slide.nextPressed()
-        } else if (keycode == Input.Keys.LEFT || keycode == 92) {
-            slide.backPressed()
-        } else if (keycode == Input.Keys.SPACE) {
-            saveScreenShot(i++)
-        } else if (keycode == Input.Keys.Q) {
-            System.exit(0)
+        when (keycode) {
+            Input.Keys.RIGHT, 93 -> slide.nextPressed()
+            Input.Keys.LEFT, 92 -> slide.backPressed()
+            Input.Keys.SPACE -> saveScreenShot(++i)
+            Input.Keys.Q -> System.exit(0)
         }
 
        return true
@@ -148,9 +147,9 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
     fun saveScreenShot(index:Int) {
         val pixels = ScreenUtils.getFrameBufferPixels(0, 0, Gdx.graphics.backBufferWidth, Gdx.graphics.backBufferHeight, true)
 
-        val pixmap = Pixmap(Gdx.graphics.backBufferWidth, Gdx.graphics.backBufferHeight, Pixmap.Format.RGBA8888)
+        val pixmap = Pixmap(Gdx.graphics.backBufferWidth, Gdx.graphics.backBufferHeight, Pixmap.Format.RGB8888)
         BufferUtils.copy(pixels, 0, pixmap.pixels, pixels.size)
-        PixmapIO.writePNG(Gdx.files.external("Downloads/screens/output${index}.png"), pixmap)
+        PixmapIO.writePNG(Gdx.files.external("Downloads/screens/output$index.png"), pixmap)
         pixmap.dispose()
     }
 }

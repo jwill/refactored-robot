@@ -1,5 +1,6 @@
 package be.jameswilliams.preso
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Vector2
@@ -28,16 +29,17 @@ object ChainBuilder {
         val widthOffset = linkLength * 0.85f
         var currentX = 0f
 
+        Gdx.gl.glLineWidth(3f)
         with(shapeRenderer) {
-            begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled)
+            begin(ShapeRenderer.ShapeType.Line)
             identity()
             translate(location.x, location.y, 0f)
             while(currentX < width) {
                 setColor(color)
-                ellipse(currentX,0f, linkLength,height)
-                setColor(color2)
-                ellipse(currentX+halfHeightOffset-5f,halfHeightOffset, widthOffset,heightOffset)
-                currentX += linkLength
+                ellipse(currentX,0f, linkLength,height, 32)
+                //setColor(color2)
+                //ellipse(currentX+halfHeightOffset-2f,halfHeightOffset, widthOffset,heightOffset)
+                currentX += linkLength * 0.6f
             }
             identity()
             end()

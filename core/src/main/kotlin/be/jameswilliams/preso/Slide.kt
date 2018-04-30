@@ -46,9 +46,9 @@ abstract class Theme:Skin() {
             if (characters != null) {
                 parameter.characters = characters
             }
-            font = generator.generateFont(parameter);
+            font = generator.generateFont(parameter)
             font.data.markupEnabled = true
-            generator.dispose(); // don't forget to dispose to avoid memory leaks!
+            generator.dispose() // don't forget to dispose to avoid memory leaks!
 
             return font
         }
@@ -65,8 +65,8 @@ class ScreencastTheme:DefaultTheme() {
     val ltGrayDetail = Color.valueOf("#90A4AE")
     val purpleDetail = Color.valueOf("#7986CB")
 
-    override val backgroundColor:Color = ltGrayDetail
-
+    //override val backgroundColor:Color = ltGrayDetail
+    override val backgroundColor:Color = Color.valueOf("#E9F4FF")
 }
 
 open class DefaultTheme:Theme() {
