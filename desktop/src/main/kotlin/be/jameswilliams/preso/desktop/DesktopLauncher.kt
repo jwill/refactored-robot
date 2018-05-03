@@ -21,11 +21,16 @@ object DesktopLauncher {
             //configuration.width = 1920
             //configuration.height = 1080
 
+
             configuration.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
             configuration.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
 
+            println(configuration.width)
+            println(configuration.height)
+
+
             //Set full screem
-            System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
+            //System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
             /*configuration.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
             configuration.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
             */
