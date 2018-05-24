@@ -4,6 +4,7 @@ import be.jameswilliams.preso.Presentation
 import be.jameswilliams.preso.Slide
 import be.jameswilliams.preso.centerX
 import be.jameswilliams.preso.headerLabel
+import be.jameswilliams.preso.templates.HeadlineSlide
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
@@ -17,7 +18,8 @@ import ktx.actors.plus
 import ktx.app.KtxScreen
 import ktx.app.clearScreen
 
-open class AndroidViewSlide : KtxScreen, Slide {
+open class AndroidViewSlide(val previous: Class<out KtxScreen>? = null,
+                            val next: Class<out KtxScreen>? = null) : KtxScreen, Slide {
     var showMeasure = false
     var showLayout = false
 
@@ -43,6 +45,7 @@ open class AndroidViewSlide : KtxScreen, Slide {
         setSlideContent()
 
     }
+
 
     override fun setSlideContent() {
         val titleLabel = headerLabel("Android View Rendering Cycle")
@@ -112,7 +115,11 @@ open class AndroidViewSlide : KtxScreen, Slide {
             showLayout = false
         else if (showMeasure)
             showMeasure = false
-        else super.backPressed()
+        else {
+            if (previous != null)Presentation.setScreen(previous)
+
+        }
+
     }
 
     override fun nextPressed() {
@@ -120,8 +127,9 @@ open class AndroidViewSlide : KtxScreen, Slide {
             showMeasure = true
         else if (!showLayout)
             showLayout = true
-        else super.nextPressed()
-
+        else {
+            if (next != null) Presentation.setScreen(next)
+        }
     }
 
 
@@ -133,6 +141,40 @@ open class AndroidViewSlide : KtxScreen, Slide {
     }
 }
 
+class AndroidViewCycle : HeadlineSlide("Android View Cycle", next = AndroidViewCycle2::class.java)
+class AndroidViewCycle2: AndroidViewSlide(previous = AndroidViewCycle::class.java, next = AndroidViewCycle3::class.java) {
+    override fun setSlideContent() {
+        super.setSlideContent()
+
+        showMeasure = false
+        showLayout = false
+    }
+}
+class AndroidViewCycle3: AndroidViewSlide(previous = AndroidViewCycle2::class.java,
+        next = AndroidViewCycle4::class.java) {
+    override fun setSlideContent() {
+        super.setSlideContent()
+
+        showMeasure = true
+        showLayout = true
+        layoutLabel.setColor(1f,1f,1f,0.1f)
+        layoutSprite.setColor(1f,1f,1f, 0.10f)
+
+    }
+}
+
+class AndroidViewCycle4: AndroidViewSlide(previous = AndroidViewCycle3::class.java) {
+    override fun setSlideContent() {
+        super.setSlideContent()
+
+        showMeasure = true
+        showLayout = true
+        rulerLabel.setColor(1f,1f,1f,0.1f)
+        rulerSprite.setColor(1f,1f,1f, 0.10f)
+
+    }
+}
+
 // Layout Dimmed
 class SlideTest : AndroidViewSlide() {
     override fun setSlideContent() {
@@ -140,7 +182,7 @@ class SlideTest : AndroidViewSlide() {
 
         showMeasure = true
         showLayout = true
-        layoutLabel.setText("")
+
         layoutSprite.setColor(1f,1f,1f, 0.10f)
     }
 }
