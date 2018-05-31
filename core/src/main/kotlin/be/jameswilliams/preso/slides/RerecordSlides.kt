@@ -141,7 +141,7 @@ open class AndroidViewSlide(val previous: Class<out KtxScreen>? = null,
     }
 }
 
-class AndroidViewCycle : HeadlineSlide("Android View Cycle", next = AndroidViewCycle2::class.java)
+class AndroidViewCycle : HeadlineSlide("Android View Rendering Cycle", next = AndroidViewCycle2::class.java)
 class AndroidViewCycle2: AndroidViewSlide(previous = AndroidViewCycle::class.java, next = AndroidViewCycle3::class.java) {
     override fun setSlideContent() {
         super.setSlideContent()
@@ -172,29 +172,5 @@ class AndroidViewCycle4: AndroidViewSlide(previous = AndroidViewCycle3::class.ja
         rulerLabel.setColor(1f,1f,1f,0.1f)
         rulerSprite.setColor(1f,1f,1f, 0.10f)
 
-    }
-}
-
-// Layout Dimmed
-class SlideTest : AndroidViewSlide() {
-    override fun setSlideContent() {
-        super.setSlideContent()
-
-        showMeasure = true
-        showLayout = true
-
-        layoutSprite.setColor(1f,1f,1f, 0.10f)
-    }
-}
-
-// Measure Dimmed
-class SlideTest2 : AndroidViewSlide() {
-    override fun setSlideContent() {
-        super.setSlideContent()
-
-        showMeasure = true
-        showLayout = true
-        rulerLabel.setText("")
-        rulerSprite.setColor(1f,1f,1f, 0.10f)
     }
 }

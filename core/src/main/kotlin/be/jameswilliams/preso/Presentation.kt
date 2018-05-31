@@ -123,9 +123,12 @@ object Presentation : KtxGame<KtxScreen>(), KtxInputAdapter {
         addScreen(Slide47A())
         addScreen(Slide53A())
 
-        addScreen(SlideTest())
+        addScreen(AndroidViewCycle())
+        addScreen(AndroidViewCycle2())
+        addScreen(AndroidViewCycle3())
+        addScreen(AndroidViewCycle4())
 
-        setScreen<SlideTest>()
+        setScreen<AndroidViewCycle>()
     }
 
     override fun dispose() {

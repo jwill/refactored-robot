@@ -38,7 +38,7 @@ abstract class Theme:Skin() {
     abstract val backgroundColor: Color
 
     companion object {
-        fun createStyle(filepath: FileHandle, scale: TypographicalScale, characters:String? = null, distanceFactor:Float = 0.5f) : BitmapFont {
+        fun createStyle(filepath: FileHandle, scale: TypographicalScale, characters:String? = null, distanceFactor:Float = 0.75f) : BitmapFont {
             var font:BitmapFont
             val generator = FreeTypeFontGenerator(filepath)
             val parameter = FreeTypeFontGenerator.FreeTypeFontParameter()
@@ -65,8 +65,8 @@ class ScreencastTheme:DefaultTheme() {
     val ltGrayDetail = Color.valueOf("#90A4AE")
     val purpleDetail = Color.valueOf("#7986CB")
 
-    //override val backgroundColor:Color = ltGrayDetail
-    override val backgroundColor:Color = Color.valueOf("#E9F4FF")
+    //override val backgroundColor:Color = Color.valueOf("#E9F4FF")
+    override val backgroundColor:Color = Color.WHITE
 }
 
 open class DefaultTheme:Theme() {
@@ -79,7 +79,7 @@ open class DefaultTheme:Theme() {
     override val backgroundColor:Color = Color().set(0.0f, 0.0f, 0.0f, 1.0f)
 
     init {
-        headerFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), DISPLAY4)
+        headerFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), DISPLAY3HALF)
         bodyFont = createStyle(Gdx.files.internal("fonts/Noto_Serif/NotoSerif-Regular.ttf"), DISPLAY3)
         codeFont = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), DISPLAY3)
         codeFont2 = createStyle(Gdx.files.internal("fonts/Inconsolata/Inconsolata-Regular.ttf"), DISPLAY3HALF)
